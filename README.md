@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/esbot_logo.jpeg" alt="ESBot Logo" width="180" />
+  <img src="./assets/esbot_logo.jpeg" alt="ESBot Logo" width="180" />
 </p>
 
 <p align="center">
