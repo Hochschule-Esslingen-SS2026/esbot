@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/esbot_logo.png" alt="ESBot Logo" width="180" />
+  <img src="assets/esbot_logo.jpeg" alt="ESBot Logo" width="180" />
 </p>
 
 <p align="center">
@@ -15,9 +15,9 @@
 > IMPORTANT: This repository is for educational purposes only. It may contain unfinished, faulty, or even non-executable code used solely for teaching during the Software Testing course. Do not use this repository for any production system.
 
 ### Overview
-ESBot is a teaching project developed during the Software Testing course (SoSe 2026) at Esslingen University (HSE). ESBot is a lightweight AI chat platform that allows users to interact with large language models through structured chat sessions while demonstrating the integration, testing, and operation of AI services in a modern three-tier software architecture.
+ESBot is a teaching project developed during the Software Testing course (SoSe 2026) at Esslingen University (HSE). ESBot is an AI-powered learning assistant that offers structured, chat-based learning sessions, focusing on explanations, examples, and lightweight quizzes for course content. Technically, ESBot follows a minimal three-tier architecture (frontend UI, application backend, and database) with an optional LLM inference component (e.g., Ollama, vLLM, LM Studio) integrated via the backend, making it well-suited for exploring integration and testing of AI-enabled systems.
 
-For additional background and high-level expectations, see the detailed concept document in `docs/esbot_app.md`.
+For additional background, high-level expectations, and detailed system requirements, see the concept document in `docs/esbot.md`.
 
 ### Course Context and Objectives
 - Learn and apply practical techniques in software testing across the development lifecycle
@@ -41,7 +41,7 @@ Submissions for each exercise shall be organized in the `docs` folder.
 - Automated UI Testing
 
 ### Documentation
-- Project concept and expectations: [`docs/esbot_app.md`](docs/esbot_app.md)
+- Project concept and expectations: [`docs/esbot.md`](docs/esbot.md)
 - All lab deliverables and write-ups: `docs/`
 
 ### Notes
