@@ -1,3 +1,51 @@
+# Diagram
+
+UC : Use Case
+
+``` mermaid
+flowchart TB
+    %% External Actors
+    Student((Student))
+    DB[(Database / Tier 3)]
+    LLM[LLM Inference Engine]
+
+    subgraph Tier1 [Tier 1: Frontend]
+        UI[Web / Mobile Interface]
+    end
+
+    subgraph Tier2 [Tier 2: Application Backend]
+        direction TB
+        Auth[Session Manager]
+        PromptEng[Prompt Generator]
+        
+        subgraph Logic [Functional Use Cases]
+            UC1(UC1: Ask Learning Question)
+            UC2(UC2: Generate Practice Quiz)
+            UC3(UC3: Submit Quiz Answers)
+            UC4(UC4: View Learning History)
+            UC5(UC5: Provide Contextual Feedback)
+        end
+    end
+
+    %% Flow of Data
+    Student <-->|HTTPS/REST| UI
+    UI <-->|API Requests| Auth
+    
+    %% Internal Logic Mapping
+    Auth --> Logic
+    UC1 & UC2 & UC5 --> PromptEng
+    
+    %% External System Integration
+    PromptEng <-->|JSON Prompt/Response| LLM
+    Logic <-->|SQL/Queries to store and retrieve Logs| DB
+    
+    %% Relationships
+    UC2 -.->|requests| UC3
+    UC3 -.->|trigger| UC5
+
+
+```
+
 # Use Case: Ask Learning Question
 
 ### Name
