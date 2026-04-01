@@ -5,6 +5,13 @@
 **Status**: Draft  
 **Input**: User description: "$ARGUMENTS"
 
+**Constitutional Alignment**: This specification MUST align with ESBot Constitution principles:
+- I. Learning-Centered Design (feature supports learning outcomes)
+- II. Modular Layered Architecture (maintains UI/Backend/DB separation)
+- III. Comprehensive Testing (testable at unit, integration, system levels)
+- IV. Observability (logging and monitoring requirements specified)
+- V. Graceful AI Degradation (fallback behavior defined if AI-dependent)
+
 ## User Scenarios & Testing *(mandatory)*
 
 <!--
@@ -103,16 +110,27 @@
 ## Success Criteria *(mandatory)*
 
 <!--
-  ACTION REQUIRED: Define measurable success criteria.
-  These must be technology-agnostic and measurable.
+  ESBot Success Criteria must include:
+  - Learning outcome metrics (user engagement, quiz completion rates)
+  - Performance targets (API <500ms p95, AI timeout 10s)
+  - Testing coverage (>80% required by constitution)
+  - Observability requirements (logging/monitoring points)
 -->
 
 ### Measurable Outcomes
 
-- **SC-001**: [Measurable metric, e.g., "Users can complete account creation in under 2 minutes"]
-- **SC-002**: [Measurable metric, e.g., "System handles 1000 concurrent users without degradation"]
-- **SC-003**: [User satisfaction metric, e.g., "90% of users successfully complete primary task on first attempt"]
-- **SC-004**: [Business metric, e.g., "Reduce support tickets related to [X] by 50%"]
+- **SC-001**: [Learning outcome metric, e.g., "Users complete practice exercises with >70% success rate"]
+- **SC-002**: [Performance metric, e.g., "API response time <500ms p95 under 50 concurrent users"]
+- **SC-003**: [Testing metric, e.g., ">80% code coverage for implemented feature"]
+- **SC-004**: [Observability metric, e.g., "All API calls logged with request ID, user ID, response time"]
+
+### Non-Functional Requirements Checklist
+
+- [ ] **Performance**: API response <500ms p95, page load <2s
+- [ ] **Scalability**: Architecture supports independent scaling of backend/AI
+- [ ] **Reliability**: Graceful degradation when AI services unavailable
+- [ ] **Security**: Input validation, data protection implemented
+- [ ] **Testability**: All components independently testable with mocks
 
 ## Assumptions
 

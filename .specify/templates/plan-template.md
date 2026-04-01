@@ -12,26 +12,34 @@
 ## Technical Context
 
 <!--
-  ACTION REQUIRED: Replace the content in this section with the technical details
-  for the project. The structure here is presented in advisory capacity to guide
-  the iteration process.
+  ESBot defaults based on ratified technology stack. Override only if explicitly
+  approved via constitution amendment process.
 -->
 
-**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
-**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
-**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
-**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
-**Project Type**: [e.g., library/cli/web-service/mobile-app/compiler/desktop-app or NEEDS CLARIFICATION]  
-**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
-**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
-**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
+**Language/Version**: TypeScript/JavaScript (Angular), C# (.NET 8+)  
+**Primary Dependencies**: Angular 17+, ASP.NET Core 8, Entity Framework Core, Npgsql  
+**Storage**: PostgreSQL 15+  
+**Testing**: xUnit (.NET), Jasmine/Karma (Angular), Playwright (E2E)  
+**Target Platform**: Web browsers (Chrome, Firefox, Safari, Edge), Linux server  
+**Project Type**: Web application (SPA frontend + REST API backend)  
+**Performance Goals**: API response <500ms p95, AI inference timeout 10s, UI load <2s  
+**Constraints**: AI fallback required for service unavailability, >80% code coverage  
+**Scale/Scope**: Up to 50 concurrent users, session persistence required
 
 ## Constitution Check
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+| Principle | Requirement | Status |
+|-----------|-------------|--------|
+| I. Learning-Centered Design | Feature MUST support learning outcomes; user engagement over passive content | [ ] |
+| II. Modular Layered Architecture | Architecture MUST maintain UI/Backend/DB separation; AI components mockable | [ ] |
+| III. Comprehensive Testing | Tests MUST be provided for unit, integration, and system levels; >80% coverage | [ ] |
+| IV. Observability | Logging MUST be specified for API requests, AI calls, errors, and response times | [ ] |
+| V. Graceful AI Degradation | Fallback behavior MUST be defined for AI service failures | [ ] |
+| Technology Stack | Implementation MUST use Angular/.NET/PostgreSQL unless explicitly approved | [ ] |
+
+*If any gate is not met, document justification in Complexity Tracking section.*
 
 ## Project Structure
 
@@ -47,48 +55,39 @@ specs/[###-feature]/
 └── tasks.md             # Phase 2 output (/speckit.tasks command - NOT created by /speckit.plan)
 ```
 
-### Source Code (repository root)
-<!--
-  ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
-  for this feature. Delete unused options and expand the chosen structure with
-  real paths (e.g., apps/admin, packages/something). The delivered plan must
-  not include Option labels.
--->
+### Source Code (ESBot Architecture)
+
+ESBot uses a strict three-tier architecture. All features MUST fit within this structure:
 
 ```text
-# [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
-src/
-├── models/
-├── services/
-├── cli/
-└── lib/
-
-tests/
-├── contract/
-├── integration/
-└── unit/
-
-# [REMOVE IF UNUSED] Option 2: Web application (when "frontend" + "backend" detected)
-backend/
-├── src/
-│   ├── models/
-│   ├── services/
-│   └── api/
-└── tests/
-
+# Frontend (Angular SPA)
 frontend/
 ├── src/
-│   ├── components/
-│   ├── pages/
-│   └── services/
+│   ├── app/
+│   │   ├── components/       # Reusable UI components
+│   │   ├── pages/            # Route pages
+│   │   ├── services/         # API client services
+│   │   └── models/           # TypeScript interfaces
+│   ├── assets/
+│   └── environments/
+└── e2e/                      # Playwright E2E tests
+
+# Backend (ASP.NET Core)
+backend/
+├── src/
+│   ├── ESBot.Api/            # API controllers, middleware
+│   ├── ESBot.Core/           # Business logic, services
+│   ├── ESBot.Domain/         # Domain models, interfaces
+│   └── ESBot.Infrastructure/ # Database, external services
 └── tests/
+    ├── ESBot.Api.Tests/      # API integration tests
+    ├── ESBot.Core.Tests/     # Unit tests
+    └── ESBot.Integration.Tests/
 
-# [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
-api/
-└── [same as backend above]
-
-ios/ or android/
-└── [platform-specific structure: feature modules, UI flows, platform tests]
+# Database
+db/
+├── migrations/               # EF Core migrations
+└── scripts/                  # Seed data, utilities
 ```
 
 **Structure Decision**: [Document the selected structure and reference the real
