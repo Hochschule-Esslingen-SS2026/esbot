@@ -1,49 +1,53 @@
-# Qualitätsmodell nach ISO 25010: ESBot
+## Quality Model according to ISO 25010: ESBot
 
-## 1. Auswahl der Qualitätsmerkmale (Top 4)
+### 1. Selection of Quality Characteristics (Top 4)
 
-### 1.1 Funktionale Angemessenheit (Functional Suitability)
-* **Definition:** Der Grad, in dem das System Funktionen bereitstellt, die die erklärten Anforderungen (Lernunterstützung, Quiz-Generierung) erfüllen.
-* **Relevanz für ESBot:** Da ESBot ein pädagogisches Werkzeug ist, ist es entscheidend, dass die KI nicht nur "antwortet", sondern didaktisch wertvolle Erklärungen liefert und die Übungen (FR-3) tatsächlich zum Kursinhalt passen.
+#### 1.1 Functional Suitability
+* **Definition:** The degree to which the system provides functions that meet stated requirements (learning support, quiz generation).
+* **Relevance for ESBot:** As an educational tool, it is crucial that the AI does not just "respond" but provides didactically valuable explanations and ensures that exercises (FR-3) actually align with the course content.
 
-### 1.2 Performance-Effizienz (Performance Efficiency)
-* **Definition:** Die Leistung im Verhältnis zu den verbrauchten Ressourcen unter bestimmten Bedingungen.
-* **Relevanz für ESBot:** KI-Inferenz ist ressourcenintensiv. Das System muss trotz der Latenz von Sprachmodellen (LLMs) eine flüssige Interaktion ermöglichen (NFR-2), damit der Lernfluss der Studierenden nicht unterbrochen wird.
+#### 1.2 Performance Efficiency
+* **Definition:** Performance relative to the amount of resources used under stated conditions.
+* **Relevance for ESBot:** AI inference is resource-intensive. Despite the inherent latency of Large Language Models (LLMs), the system must enable fluid interaction (NFR-2) so that the students' learning flow is not interrupted.
 
-### 1.3 Benutzbarkeit (Usability)
-* **Definition:** Der Grad, in dem ein Produkt durch bestimmte Benutzer genutzt werden kann, um festgelegte Ziele effektiv und zufriedenstellend zu erreichen.
-* **Relevanz für ESBot:** Da das System ohne Schulung (NFR-1) funktionieren soll, muss das Interface selbsterklärend sein. Ein komplizierter Chat würde das eigentliche Ziel – das Lernen – behindern.
+#### 1.3 Usability
+* **Definition:** The degree to which a product can be used by specified users to achieve specified goals with effectiveness and satisfaction.
+* **Relevance for ESBot:** Since the system must function without prior training (NFR-1), the interface must be self-explanatory. A complicated chat experience would hinder the primary objective: learning.
 
-### 1.4 Wartbarkeit (Maintainability) – Fokus: Testbarkeit
-* **Definition:** Die Leichtigkeit, mit der ein System modifiziert werden kann, um Fehler zu korrigieren oder neue Anforderungen zu implementieren.
-* **Relevanz für ESBot:** Im Kontext dieses Kurses ist die **Testbarkeit** (Teilmerkmal der Wartbarkeit) zentral. Das System muss so modular sein, dass der nicht-deterministische Teil (KI) isoliert getestet werden kann.
+#### 1.4 Maintainability – Focus: Testability
+* **Definition:** The ease with which a system can be modified to correct defects or implement new requirements.
+* **Relevance for ESBot:** In the context of this course, **testability** (a sub-characteristic of maintainability) is central. The system must be modular enough to allow the non-deterministic component (the AI) to be tested in isolation.
 
-## 2. Dokumentation der Qualitätsmodelle (Metriken & Ziele)
+---
 
-| Qualitätsmerkmal | Qualitätsziel (Messbar) | Methode / Metrik |
+### 2. Documentation of Quality Models (Metrics & Goals)
+
+| Quality Characteristic | Quality Goal (Measurable) | Method / Metric |
 | :--- | :--- | :--- |
-| **Funktionale Angemessenheit** | Korrektheit der Quiz-Logik | Prozentsatz korrekt evaluierter Benutzerantworten (FR-4) durch Experten-Review > 90%. |
-| **Performance-Effizienz** | Antwortlatenz unter Last | Zeit bis zum ersten Token (TTFT) < 2-5 Sekunden bei 50 parallelen Nutzern. |
-| **Benutzbarkeit** | Erlernbarkeit | "Time-to-first-prompt": Ein neuer Nutzer stellt seine erste fachliche Frage in < 30 Sekunden nach dem Login. |
-| **Wartbarkeit** | Testbarkeit der Logik | 100% der Backend-Schnittstellen (API) sind durch automatisierte Tests abdeckbar (Mocking-Fähigkeit). |
+| **Functional Suitability** | Correctness of quiz logic | Percentage of correctly evaluated user answers (FR-4) via expert review > 90%. |
+| **Performance Efficiency** | Response latency under load | Time to First Token (TTFT) < 2–5 seconds with 50 concurrent users. |
+| **Usability** | Learnability | "Time-to-first-prompt": A new user submits their first subject-related question in < 30 seconds after login. |
+| **Maintainability** | Logic testability | 100% of backend interfaces (APIs) are coverable by automated tests (mocking capability). |
 
-## 3. Maßnahmen zur Gewährleistung der Testbarkeit
+---
 
-Um den Aspekt der **Testbarkeit** während der Entwicklung von ESBot zu garantieren, schlagen wir folgende spezifische Maßnahmen vor:
+### 3. Measures to Ensure Testability
 
-### A. Entkopplung durch die Adapter-Pattern
-Die KI-Inferenz (Ollama/vLLM) sollte über einen Adapter angesprochen werden. Dies erlaubt es, im Testfall einen "Stub-Adapter" zu verwenden, der vordefinierte Texte zurückgibt. So können wir das Backend testen, ohne teure oder langsame KI-Aufrufe tätigen zu müssen.
+To guarantee **testability** during the development of ESBot, we propose the following specific measures:
 
-### B. Strukturierung der KI-Antworten (Schema-Validation)
-Da KI-Output oft unvorhersehbar ist, sollte ESBot die KI zwingen, Antworten (insbesondere bei Quiz-Fragen) in einem strukturierten Format wie JSON auszugeben.
-* **Maßnahme:** Automatisierte Tests validieren den Output gegen ein JSON-Schema. Das erhöht die Testbarkeit der "Answer Evaluation" (FR-4) massiv.
+#### A. Decoupling via Adapter Pattern
+AI inference (Ollama/vLLM) should be accessed through an adapter. This allows the use of a "stub adapter" during testing, which returns predefined text. This enables backend testing without relying on expensive or slow AI calls.
 
-### C. Containerisierung für Integrationstests
-Damit jeder Entwickler und die CI-Pipeline (Continuous Integration) die gleiche Umgebung haben, wird das gesamte System (UI, Backend, DB) in Docker-Containern bereitgestellt.
-* **Maßnahme:** Integrationstests können per Skript eine saubere Test-Datenbank hochfahren und nach dem Test wieder löschen.
+#### B. Structuring AI Responses (Schema Validation)
+Since AI output is often unpredictable, ESBot should force the AI to provide responses (especially for quiz questions) in a structured format such as JSON.
+* **Measure:** Automated tests validate the output against a JSON schema. This significantly increases the testability of "Answer Evaluation" (FR-4).
 
-### D. Logging & Tracing für Fehlersuche
-Um Fehler in der Kette "Nutzer -> Backend -> KI -> Nutzer" zu finden, muss jeder Schritt geloggt werden.
-* **Maßnahme:** Implementierung von detaillierten Protokollen, die genau zeigen, welcher Prompt an die KI gesendet wurde. Dies ist essenziell, um "Halluzinationen" der KI von Fehlern im Backend-Code zu unterscheiden.
+#### C. Containerization for Integration Tests
+To ensure every developer and the CI (Continuous Integration) pipeline share the same environment, the entire system (UI, Backend, DB) will be deployed in Docker containers.
+* **Measure:** Integration tests can use scripts to spin up a clean test database and tear it down after completion.
 
-`Grammtik und Sortierung verbessern mit ChatGPT Version 5.3 (27.03.2026 15:45)`
+#### D. Logging & Tracing for Troubleshooting
+To identify errors within the "User -> Backend -> AI -> User" chain, every step must be logged.
+* **Measure:** Implementation of detailed logs that show exactly which prompt was sent to the AI. This is essential for distinguishing AI "hallucinations" from bugs in the backend code.
+
+`Grammtic,translation and sorting improvements with ChatGPT Version 5.3 (27.03.2026 15:45)``

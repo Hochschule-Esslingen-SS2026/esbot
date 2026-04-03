@@ -154,4 +154,4 @@ The User opens the ESBot application or selects a specific past session from a s
 * **Output:** A chronologically ordered display of past interactions.
 * **Post-Condition:** The current conversational state is synchronized with the last known interaction in the Database.
 
-`Grammtik und Sortierung verbessern mit ChatGPT Version 5.3 (27.03.2026 15:45)`
+`Grammtic and sorting improvements with ChatGPT Version 5.3 (27.03.2026 15:45)`

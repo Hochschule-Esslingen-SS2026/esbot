@@ -29,7 +29,8 @@ You need to have access and/or installed the following tools:
 * The project constitution in `.specify/memory/constitution.md`
 * Your results from Exercise 2 (`docs/spec/requirements.md`, `docs/spec/quality.md`,
   and optionally `docs/spec/spec.md`)
-* Reas the article “[Faktoren der User Experience: Systematische Übersicht über produktrelevante UX-Qualitätsaspekte](https://www.researchgate.net/publication/281784277_Faktoren_der_User_Experience_Systematische_Ubersicht_uber_produktrelevante_UX-Qualitatsaspekte)“ – English version: „[Applicability of User Experience and Usability Questionnaires](https://core.ac.uk/download/pdf/395662617.pdf)“. 
+* Read the article “[Faktoren der User Experience: Systematische Übersicht über produktrelevante UX-Qualitätsaspekte](https://www.researchgate.net/publication/281784277_Faktoren_der_User_Experience_Systematische_Ubersicht_uber_produktrelevante_UX-Qualitatsaspekte)“ – English version: „[Applicability of User Experience and Usability Questionnaires](https://core.ac.uk/download/pdf/395662617.pdf)“.
+[HERE](Faktoren_der_User_Experience.pdf)
 
 ---
 

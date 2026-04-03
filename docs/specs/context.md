@@ -35,4 +35,4 @@ Since the LLM is non-deterministic, you cannot always predict the *exact* string
 For **Unit Testing** the Backend, you should not call the actual LLM (it’s slow and expensive).
 * **Test Strategy:** Implement a **Mock LLM Provider** that returns predefined strings to verify that the Backend correctly saves these strings to the Database.
 
-`Grammtik und Sortierung verbessern mit ChatGPT Version 5.3 (27.03.2026 15:45)`
+`Grammtic and sorting improvements with ChatGPT Version 5.3 (27.03.2026 15:45)`
