@@ -1,5 +1,6 @@
-using API.Infrastructure;
-using Domain.Exceptions;
+using Core;
+using Core.Exceptions;
+using Infrastructure;
 using Scalar.AspNetCore;
 
 
@@ -46,15 +47,15 @@ try
     // Add other layers
     if (!builder.Environment.IsEnvironment("Testing"))
     {
-        builder.Services.AddDataBase(builder.Configuration, logger); ;
+        builder.Services.AddDataBase(builder.Configuration, logger);
     }
     else
     {
         logger.LogInformation($"Skipping database connection Test in Environment {builder.Environment}");
     }
     
-    builder.Services.AddServices();
-    builder.Services.AddMapper();
+    builder.Services.AddInfrastructureServices();
+    builder.Services.AddCoreServices();
 
     builder.Services.AddControllers();
 
@@ -69,7 +70,7 @@ try
         logger.LogInformation($"Skipping database connection Test in Environment {app.Environment}");
     }
 
-    if (app.Environment.IsDevelopment())
+    if (app.Environment.IsDevelopment() || app.Environment.IsEnvironment("Testing"))
     {
         app.UseCors(devCorsPolicy);
         app.MapOpenApi();

@@ -1,11 +1,10 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
-using API.Application.DTOs.Responses;
-using API.Infrastructure.Persistence.Context;
-using Domain.Entities;
+using Core.Data.DTOs.Responses;
+using Core.Data.Entities;
+using Infrastructure.Persistence.Context;
 using Microsoft.Extensions.DependencyInjection;
 using Test.Presentation.FunctionalTests.Helper;
-using Xunit;
 
 namespace Test.Presentation.FunctionalTests;
 

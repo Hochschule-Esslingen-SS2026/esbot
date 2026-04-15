@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <RootNamespace>Infrastructure</RootNamespace>
+    </PropertyGroup>
+    <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\Core.Exceptions\Core.Exceptions.csproj" />
+      <ProjectReference Include="..\Core.Interfaces\Core.Interfaces.csproj" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Services\External\" />
+    </ItemGroup>
+
+</Project>

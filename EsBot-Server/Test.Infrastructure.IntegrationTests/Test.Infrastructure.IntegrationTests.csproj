@@ -1,12 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <IsPackable>false</IsPackable>
-        <RootNamespace>Test.Infrastructure.IntegrationTests</RootNamespace>
+
     </PropertyGroup>
-    <ItemGroup>
-        <Using Include="Xunit" />
-        <Using Include="FluentAssertions" />
-    </ItemGroup>
     <ItemGroup>
         <PackageReference Include="coverlet.collector">
             <PrivateAssets>all</PrivateAssets>
@@ -19,5 +14,10 @@
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Using Include="Xunit" />
+        <Using Include="FluentAssertions" />
     </ItemGroup>
 </Project>

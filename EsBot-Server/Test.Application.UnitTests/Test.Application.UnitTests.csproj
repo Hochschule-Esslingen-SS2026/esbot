@@ -4,10 +4,6 @@
         <RootNamespace>Test.Application.UnitTests</RootNamespace>
     </PropertyGroup>
     <ItemGroup>
-        <Using Include="Xunit" />
-        <Using Include="FluentAssertions" />
-    </ItemGroup>
-    <ItemGroup>
       <PackageReference Include="coverlet.collector">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -21,6 +17,11 @@
       </PackageReference>
     </ItemGroup>
     <ItemGroup>
-      <ProjectReference Include="..\Domain\Domain.csproj" />
+      <ProjectReference Include="..\Core.Data\Core.Data.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Using Include="Xunit" />
+        <Using Include="FluentAssertions" />
     </ItemGroup>
 </Project>

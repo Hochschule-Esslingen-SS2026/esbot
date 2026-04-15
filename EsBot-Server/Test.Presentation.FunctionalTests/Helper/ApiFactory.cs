@@ -1,4 +1,4 @@
-using API.Infrastructure.Persistence.Context;
+using Infrastructure.Persistence.Context;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;

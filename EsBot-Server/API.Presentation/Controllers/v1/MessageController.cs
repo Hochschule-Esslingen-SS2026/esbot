@@ -1,6 +1,6 @@
-using API.Application.DTOs.Requests;
-using API.Application.DTOs.Responses;
-using API.Application.Interfaces;
+using Core.Data.DTOs.Requests;
+using Core.Data.DTOs.Responses;
+using Core.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Presentation.Controllers.v1;
@@ -39,7 +39,7 @@ public class MessageController : ControllerBase
         }
     }
     
-    [HttpGet("{id}")]
+    [HttpGet("{id:guid}")]
     public async Task<ActionResult<MessageResponse>> GetById(Guid id)
     {
         var message = await _messageManagementService.GetByIdAsync(id);
