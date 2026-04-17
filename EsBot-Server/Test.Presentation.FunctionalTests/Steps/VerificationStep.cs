@@ -18,12 +18,11 @@ public class VerificationSteps
         _context = context;
     }
 
-    [Then(@"the question should be saved with the session-id ""(.*)"" in the DataBase")]
-    public void ThenQuestionShouldBeSaved(string sessionId)
+    [Then(@"the question should be saved with the session-id in the DataBase")]
+    public void ThenQuestionShouldBeSaved()
     {
         using var scope = _factory.Services.CreateScope();
         var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-
         var exists = db.Messages.Any(m => m.UserSessionId == _context.SessionId);
 
         exists.Should().BeTrue();
