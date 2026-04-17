@@ -30,7 +30,7 @@ public class MessageControllerTests : IClassFixture<ApiFactory>
         context.Database.EnsureCreated();
 
         // Add fake data
-        context.Messages.Add(new Message { Id = Guid.NewGuid(), Content = "John Doe" });
+        context.Messages.Add(new Message {UserSessionId = Guid.NewGuid(), Timestamp = DateTime.UtcNow, Id = Guid.NewGuid(), Content = "John Doe" ,Role = true});
         context.SaveChanges();
     }
 

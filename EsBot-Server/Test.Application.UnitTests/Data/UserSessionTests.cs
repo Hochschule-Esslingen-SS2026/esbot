@@ -36,7 +36,7 @@ public class UserSessionTests
     {
         // Arrange
         var session = new UserSession { Id = Guid.NewGuid(), ExternalUserId = "test" };
-        var message = new Message { 
+        var message = new Message {  Id = Guid.NewGuid(), UserSessionId = Guid.NewGuid(), Timestamp = DateTime.UtcNow,
             Content = "Hello", 
             Role = true, 
             UserSession = session 

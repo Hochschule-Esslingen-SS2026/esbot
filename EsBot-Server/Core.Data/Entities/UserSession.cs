@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Core.Data.DTOs.Requests;
 
 namespace Core.Data.Entities;
 

@@ -17,21 +17,21 @@ namespace Test.Presentation.FunctionalTests.Features
     
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Reqnroll", "3.0.0.0")]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public partial class AskAQuestionJanR_Feature : object, global::Xunit.IClassFixture<AskAQuestionJanR_Feature.FixtureData>, global::Xunit.IAsyncLifetime
+    public partial class RequestAQuizLeonFeature : object, global::Xunit.IClassFixture<RequestAQuizLeonFeature.FixtureData>, global::Xunit.IAsyncLifetime
     {
         
         private global::Reqnroll.ITestRunner testRunner;
         
         private static string[] featureTags = ((string[])(null));
         
-        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en-US"), "Features", "Ask a Question Jan R.", null, global::Reqnroll.ProgrammingLanguage.CSharp, featureTags, InitializeCucumberMessages());
+        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en-US"), "Features", "Request a Quiz Leon", null, global::Reqnroll.ProgrammingLanguage.CSharp, featureTags, InitializeCucumberMessages());
         
         private global::Xunit.Abstractions.ITestOutputHelper _testOutputHelper;
         
-#line 1 "AskQuestions.feature"
+#line 1 "RequestaQuiz.feature"
 #line hidden
         
-        public AskAQuestionJanR_Feature(AskAQuestionJanR_Feature.FixtureData fixtureData, global::Xunit.Abstractions.ITestOutputHelper testOutputHelper)
+        public RequestAQuizLeonFeature(RequestAQuizLeonFeature.FixtureData fixtureData, global::Xunit.Abstractions.ITestOutputHelper testOutputHelper)
         {
             this._testOutputHelper = testOutputHelper;
         }
@@ -105,7 +105,7 @@ namespace Test.Presentation.FunctionalTests.Features
         
         private static global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages InitializeCucumberMessages()
         {
-            return new global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages("Features/AskQuestions.feature.ndjson", 5);
+            return new global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages("Features/RequestaQuiz.feature.ndjson", 4);
         }
         
         async global::System.Threading.Tasks.Task global::Xunit.IAsyncLifetime.InitializeAsync()
@@ -133,20 +133,18 @@ namespace Test.Presentation.FunctionalTests.Features
             await this.TestTearDownAsync();
         }
         
-        [global::Xunit.SkippableFactAttribute(DisplayName="Ask a Question with LLm responding")]
-        [global::Xunit.TraitAttribute("FeatureTitle", "Ask a Question Jan R.")]
-        [global::Xunit.TraitAttribute("Description", "Ask a Question with LLm responding")]
-        [global::Xunit.TraitAttribute("Category", "mock-llm")]
-        public async global::System.Threading.Tasks.Task AskAQuestionWithLLmResponding()
+        [global::Xunit.SkippableFactAttribute(DisplayName="Student requests a Quiz")]
+        [global::Xunit.TraitAttribute("FeatureTitle", "Request a Quiz Leon")]
+        [global::Xunit.TraitAttribute("Description", "Student requests a Quiz")]
+        public async global::System.Threading.Tasks.Task StudentRequestsAQuiz()
         {
-            string[] tagsOfScenario = new string[] {
-                    "mock-llm"};
+            string[] tagsOfScenario = ((string[])(null));
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
             string pickleIndex = "0";
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Ask a Question with LLm responding", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Student requests a Quiz", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 4
+#line 3
 this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -156,37 +154,37 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
             else
             {
                 await this.ScenarioStartAsync();
-#line 5
+#line 4
     await testRunner.GivenAsync("the API is running", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-#line 6
-    await testRunner.WhenAsync("the Student sends a question", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line 5
+    await testRunner.WhenAsync("the Student requests a quiz on \"Object Oriented Programming\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 7
+#line 6
     await testRunner.ThenAsync("the response status should be 200", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
-#line 8
-    await testRunner.ThenAsync("the question should be saved with the session-id \"\" in the DataBase", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line 7
+    await testRunner.ThenAsync("the System generates a list of questions", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
-#line 9
-    await testRunner.ThenAsync("the respone should contain \"mockedanswer\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line 8
+    await testRunner.ThenAsync("the questions are send to the student", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
         }
         
-        [global::Xunit.SkippableFactAttribute(DisplayName="Ask a Question with real LLm responding")]
-        [global::Xunit.TraitAttribute("FeatureTitle", "Ask a Question Jan R.")]
-        [global::Xunit.TraitAttribute("Description", "Ask a Question with real LLm responding")]
-        public async global::System.Threading.Tasks.Task AskAQuestionWithRealLLmResponding()
+        [global::Xunit.SkippableFactAttribute(DisplayName="Studen requests a Quiz on NSFW Content")]
+        [global::Xunit.TraitAttribute("FeatureTitle", "Request a Quiz Leon")]
+        [global::Xunit.TraitAttribute("Description", "Studen requests a Quiz on NSFW Content")]
+        public async global::System.Threading.Tasks.Task StudenRequestsAQuizOnNSFWContent()
         {
             string[] tagsOfScenario = ((string[])(null));
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
             string pickleIndex = "1";
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Ask a Question with real LLm responding", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Studen requests a Quiz on NSFW Content", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 11
+#line 10
 this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -196,56 +194,14 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
             else
             {
                 await this.ScenarioStartAsync();
-#line 12
+#line 11
     await testRunner.GivenAsync("the API is running", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+#line hidden
+#line 12
+    await testRunner.WhenAsync("the Studen requests a quiz on \"NSFW\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 13
-    await testRunner.WhenAsync("the Student sends a question", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
-#line hidden
-#line 14
-    await testRunner.ThenAsync("the response status should be 200", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
-#line hidden
-#line 15
-    await testRunner.ThenAsync("the question should be saved with the session-id \"\" in the DataBase", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
-#line hidden
-#line 16
-    await testRunner.ThenAsync("the respone should contain \"real LLm Answer\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
-#line hidden
-            }
-            await this.ScenarioCleanupAsync();
-        }
-        
-        [global::Xunit.SkippableFactAttribute(DisplayName="Ask a Question with LLM timeout")]
-        [global::Xunit.TraitAttribute("FeatureTitle", "Ask a Question Jan R.")]
-        [global::Xunit.TraitAttribute("Description", "Ask a Question with LLM timeout")]
-        [global::Xunit.TraitAttribute("Category", "llm-timeout")]
-        public async global::System.Threading.Tasks.Task AskAQuestionWithLLMTimeout()
-        {
-            string[] tagsOfScenario = new string[] {
-                    "llm-timeout"};
-            global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
-            string pickleIndex = "2";
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Ask a Question with LLM timeout", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
-            string[] tagsOfRule = ((string[])(null));
-            global::Reqnroll.RuleInfo ruleInfo = null;
-#line 18
-this.ScenarioInitialize(scenarioInfo, ruleInfo);
-#line hidden
-            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
-            {
-                await testRunner.SkipScenarioAsync();
-            }
-            else
-            {
-                await this.ScenarioStartAsync();
-#line 19
-    await testRunner.GivenAsync("the API is running", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
-#line hidden
-#line 20
-    await testRunner.WhenAsync("the Student sends a question", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
-#line hidden
-#line 21
-    await testRunner.ThenAsync("the response status should be 524", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+    await testRunner.ThenAsync("the response status should be 402", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -258,12 +214,12 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
             
             async global::System.Threading.Tasks.Task global::Xunit.IAsyncLifetime.InitializeAsync()
             {
-                await AskAQuestionJanR_Feature.FeatureSetupAsync();
+                await RequestAQuizLeonFeature.FeatureSetupAsync();
             }
             
             async global::System.Threading.Tasks.Task global::Xunit.IAsyncLifetime.DisposeAsync()
             {
-                await AskAQuestionJanR_Feature.FeatureTearDownAsync();
+                await RequestAQuizLeonFeature.FeatureTearDownAsync();
             }
         }
     }

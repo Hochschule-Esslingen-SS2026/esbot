@@ -8,7 +8,7 @@ public class MessageTests
     [Fact]
     public void CreateMessage_WithValidData_SetsProperties()
     {
-        var message = new Message { Content = "Explain AI", Role = true };
+        var message = new Message { Id = Guid.NewGuid(), UserSessionId = Guid.NewGuid(), Timestamp = DateTime.UtcNow, Content = "Explain AI", Role = true };
 
         message.Content.Should().Be("Explain AI");
         message.Role.Should().Be(true);
@@ -18,7 +18,7 @@ public class MessageTests
     [Fact]
     public void Message_ContentExceedsReasonableLimits_CheckIfRequired()
     {
-        var message = new Message { Content = null!, Role = false };
+        var message = new Message { Id = Guid.NewGuid(), UserSessionId = Guid.NewGuid(), Timestamp = DateTime.UtcNow, Content = null!, Role = false };
         var errors = UnitTests.ValidationHelper.ValidateModel(message);
         errors.Should().Contain(e => e.MemberNames.Contains("Content"));
     }

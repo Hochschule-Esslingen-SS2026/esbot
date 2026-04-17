@@ -9,7 +9,5 @@ public class EvaluationResultMappingProfile : Profile
     public EvaluationResultMappingProfile()
     {
         CreateMap<EvaluationResult, EvaluationResult>();
-        CreateMap<CreateMessageRequest, EvaluationResult>()
-            .ForMember(dest => dest.EvaluatedAt, opt => opt.MapFrom(src =>DateTime.UtcNow));
     }
 }

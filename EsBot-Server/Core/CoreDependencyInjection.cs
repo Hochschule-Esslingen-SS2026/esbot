@@ -8,7 +8,7 @@ public static class CoreDependencyInjection
 {
     public static IServiceCollection AddCoreServices(this IServiceCollection services)
     {
-        services.AddScoped<IMessageManagementService, MessageManagementService>();
+        services.AddScoped<IQuestionManagementService, QuestionManagementService>();
         
         services.AddAutoMapper(cfg => {},typeof(IApplicationAssemblyMarker).Assembly);
         

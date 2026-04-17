@@ -1,7 +1,9 @@
 using Core.Exceptions;
 using Core.Interfaces.Repositories;
+using Core.Interfaces.Services;
 using Infrastructure.Persistence.Context;
 using Infrastructure.Persistence.Repositories;
+using Infrastructure.Services.External;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,7 +17,9 @@ public static class InfrastructureDependencyInjection
     {
         public IServiceCollection AddInfrastructureServices()
         {
-            services.AddScoped<IMessageRepository, MessageRepository>();
+            services.AddScoped<IQuestionRepository, QuestionRepository>();
+            services.AddScoped<ILlmInterface, LlmInterface>();
+            services.AddScoped<IQuizRepository, QuizRepository>();
             return services;
         }
 
