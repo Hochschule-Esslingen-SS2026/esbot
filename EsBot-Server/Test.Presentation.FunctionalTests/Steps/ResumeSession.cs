@@ -1,7 +1,10 @@
 using System.Text.Json;
 using Core.Data.DTOs.Responses;
+using Core.Data.Entities;
+using Infrastructure.Persistence.Context;
 using Reqnroll;
 using Test.Presentation.FunctionalTests.Context;
+using Test.Presentation.FunctionalTests.Helper;
 
 namespace Test.Presentation.FunctionalTests.Steps;
 
@@ -10,22 +13,39 @@ public class ResumeSession
 {
     private readonly HttpClient _client;
     private readonly TestContext _context;
+    private readonly ApiFactory _factory;
 
-    public ResumeSession(HttpClient client, TestContext context)
+    public ResumeSession(HttpClient client, TestContext context, ApiFactory factory)
     {
         _client = client;
         _context = context;
+        _factory = factory;
+    }
+    
+    [Given(@"the database is seeded with messsages")]
+    public async Task SeedJavaQuestions()
+    {
+        var sessionId = Guid.NewGuid();
+        _context.SessionId = sessionId;
+        await _factory.SeedDataAsync<ApplicationDbContext>(db =>
+        {
+            db.Messages.AddRange(new List<Message>
+            {
+                new() { Id = Guid.NewGuid(), UserSessionId = sessionId, Content = "Bllaaa" , Role = false , Timestamp =  DateTime.Now},
+                new() { Id = Guid.NewGuid(), UserSessionId = sessionId, Content = "Bllaaa1" , Role = false , Timestamp =  DateTime.Now},
+                new() { Id = Guid.NewGuid(), UserSessionId = sessionId, Content = "Bllaaa2" , Role = false , Timestamp =  DateTime.Now},
+                new() { Id = Guid.NewGuid(), UserSessionId = Guid.NewGuid(), Content = "Bllaaa" , Role = false , Timestamp =  DateTime.Now},
+            });
+        });
     }
 
     [When(@"the student requests an old session with session-id")]
     public async Task WhenTheStudentRequestsAnOldSessionWithSessionId()
     {
-        var userSessionId = Guid.NewGuid();
-        var response = await _client.GetAsync($"API/v1/Session?id={userSessionId}");
+        var response = await _client.GetAsync($"API/v1/Session?id={_context.SessionId}");
         
         _context.Response = response;
         _context.ResponseContent = await response.Content.ReadAsStringAsync();
-        _context.SessionId = userSessionId;
     }
 
     [Then(@"the response should contain all messages with that session-id")]
