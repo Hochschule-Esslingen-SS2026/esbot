@@ -20,17 +20,17 @@ public class RequestQuiz
         _context = context;
     }
 
-    [When(@"the Student requests a quiz on ""(.*)""")]
-    public async Task WhenTheStudentRequestsAQuizOn()
+    [When("the Student requests a quiz on {string}")]
+    public async Task WhenTheStudentRequestsAQuizOn(string topic)
     {
         var userSessionId = Guid.NewGuid();
         var payload = new CreateQuizRequest
         {
-            Topic = "Java",
+            Topic = topic,
             UserSessionId = userSessionId
         };
 
-        var response = await _client.PostAsJsonAsync("/v1/quiz", payload);
+        var response = await _client.PostAsJsonAsync("api/v1/quiz", payload);
 
         _context.Response = response;
         _context.ResponseContent = await response.Content.ReadAsStringAsync();

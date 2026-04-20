@@ -136,17 +136,15 @@ namespace Test.Presentation.FunctionalTests.Features
         [global::Xunit.SkippableFactAttribute(DisplayName="Student requests a Quiz")]
         [global::Xunit.TraitAttribute("FeatureTitle", "Request a Quiz")]
         [global::Xunit.TraitAttribute("Description", "Student requests a Quiz")]
-        [global::Xunit.TraitAttribute("Category", "mock-llm")]
         public async global::System.Threading.Tasks.Task StudentRequestsAQuiz()
         {
-            string[] tagsOfScenario = new string[] {
-                    "mock-llm"};
+            string[] tagsOfScenario = ((string[])(null));
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
             string pickleIndex = "0";
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Student requests a Quiz", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 4
+#line 3
 this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -156,19 +154,19 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
             else
             {
                 await this.ScenarioStartAsync();
-#line 5
+#line 4
     await testRunner.GivenAsync("the API is running", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-#line 6
+#line 5
     await testRunner.WhenAsync("the Student requests a quiz on \"Object Oriented Programming\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 7
+#line 6
     await testRunner.ThenAsync("the response status should be 200", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
-#line 8
+#line 7
     await testRunner.ThenAsync("the System generates a list of questions", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
-#line 9
+#line 8
     await testRunner.ThenAsync("the questions are send to the student", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
@@ -178,17 +176,15 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
         [global::Xunit.SkippableFactAttribute(DisplayName="Student requests a Quiz on NSFW Content")]
         [global::Xunit.TraitAttribute("FeatureTitle", "Request a Quiz")]
         [global::Xunit.TraitAttribute("Description", "Student requests a Quiz on NSFW Content")]
-        [global::Xunit.TraitAttribute("Category", "mock-llm")]
         public async global::System.Threading.Tasks.Task StudentRequestsAQuizOnNSFWContent()
         {
-            string[] tagsOfScenario = new string[] {
-                    "mock-llm"};
+            string[] tagsOfScenario = ((string[])(null));
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
             string pickleIndex = "1";
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Student requests a Quiz on NSFW Content", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 12
+#line 10
 this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -198,13 +194,13 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
             else
             {
                 await this.ScenarioStartAsync();
-#line 13
+#line 11
     await testRunner.GivenAsync("the API is running", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-#line 14
+#line 12
     await testRunner.WhenAsync("the Student requests a quiz on \"NSFW\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 15
+#line 13
     await testRunner.ThenAsync("the response status should be 402", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }

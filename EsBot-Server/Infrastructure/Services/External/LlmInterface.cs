@@ -14,16 +14,15 @@ public class LlmInterface(IQuizRepository quizRepository): ILlmInterface
 
     public async Task<Quiz> CreateQuiz(QuizRequest quiz)
     {
-
         return new Quiz
         {
             Question = quiz.Topic,
-            Items =
-            [
-                new QuizItem { QuestionText = $"What is a class in {quiz.Topic}?" },
-                new QuizItem { QuestionText = $"Explain inheritance in {quiz.Topic}." },
-                new QuizItem { QuestionText = $"What is encapsulation in {quiz.Topic}?" }
-            ]
+            Items = new[]
+            {
+                new Core.Data.Entities.QuizItem { QuestionText = $"What is a class in {quiz.Topic}?" },
+                new Core.Data.Entities.QuizItem { QuestionText = $"Explain inheritance in {quiz.Topic}." },
+                new Core.Data.Entities.QuizItem { QuestionText = $"What is encapsulation in {quiz.Topic}?" }
+            }
         };
     }
 }
