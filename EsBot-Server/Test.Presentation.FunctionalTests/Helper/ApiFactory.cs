@@ -8,7 +8,6 @@ using Test.Presentation.FunctionalTests.Context;
 
 namespace Test.Presentation.FunctionalTests.Helper;
 
-
 public class ApiFactory : WebApplicationFactory<Program>
 {
     public string DbName { get; } = Guid.NewGuid().ToString();
@@ -29,4 +28,15 @@ public class ApiFactory : WebApplicationFactory<Program>
 
         builder.UseEnvironment("Testing");
     }
+    
+    public async Task SeedDataAsync<T>(Action<T> seedAction) where T : DbContext
+    {
+        using var scope = Services.CreateScope();
+        var context = scope.ServiceProvider.GetRequiredService<T>();
+        seedAction(context);
+        await context.SaveChangesAsync();
+    }
+    
+    private T Deserialize<T>(string content) => 
+        JsonSerializer.Deserialize<T>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!;
 }
