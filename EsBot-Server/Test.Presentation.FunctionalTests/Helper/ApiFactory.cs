@@ -36,4 +36,7 @@ public class ApiFactory : WebApplicationFactory<Program>
         seedAction(context);
         await context.SaveChangesAsync();
     }
+    
+    private T Deserialize<T>(string content) => 
+        JsonSerializer.Deserialize<T>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!;
 }
