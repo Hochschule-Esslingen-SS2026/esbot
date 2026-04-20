@@ -1,4 +1,4 @@
-Feature: Request a Quiz Leon
+Feature: Request a Quiz
 
 Scenario: Student requests a Quiz
     Given the API is running
@@ -7,7 +7,7 @@ Scenario: Student requests a Quiz
     Then the System generates a list of questions
     Then the questions are send to the student
     
-Scenario: Studen requests a Quiz on NSFW Content
+Scenario: Student requests a Quiz on NSFW Content
     Given the API is running
-    When the Studen requests a quiz on "NSFW"
+    When the Student requests a quiz on "NSFW"
     Then the response status should be 402

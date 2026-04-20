@@ -11,10 +11,18 @@ public class LlmInterface(IQuizRepository quizRepository): ILlmInterface
     {
         return $" Really from a real LLm Answer {message}";
     }
-    
-    public async Task<Quiz> CreateQuiz(QuizRequest message)
+
+    public async Task<Quiz> CreateQuiz(QuizRequest quiz)
     {
-        
-        throw new  NotImplementedException();
+        return new Quiz
+        {
+            Question = quiz.Topic,
+            Items = new[]
+            {
+                new Core.Data.Entities.QuizItem { QuestionText = $"What is a class in {quiz.Topic}?" },
+                new Core.Data.Entities.QuizItem { QuestionText = $"Explain inheritance in {quiz.Topic}." },
+                new Core.Data.Entities.QuizItem { QuestionText = $"What is encapsulation in {quiz.Topic}?" }
+            }
+        };
     }
 }
