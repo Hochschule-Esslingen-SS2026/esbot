@@ -10,6 +10,7 @@
   <img alt="Made at HSE Esslingen" src="https://img.shields.io/badge/made%20at-HSE%20Esslingen-0a7ea4">
 </p>
 
+[![Quality Gate Status](https://sonar.braincrush.org/api/project_badges/measure?project=EsBot&metric=alert_status&token=sqb_9cad1c46958e083ff5e5548460edbfdf137ef0de)](https://sonar.braincrush.org/dashboard?id=EsBot)
 ## ESBot (HSE Esslingen Software Testing Course)
 
 > IMPORTANT: This repository is for educational purposes only. It may contain unfinished, faulty, or even non-executable code used solely for teaching during the Software Testing course. Do not use this repository for any production system.
@@ -47,7 +48,6 @@ Submissions for each exercise shall be organized in the `docs` folder.
 ### Notes
 - The repository content evolves during the course and may intentionally include defects for learning purposes.
 - If you discover issues, document them and propose fixes as part of your exercises (e.g., via pull requests or notes in `docs/`).
-
 
 ### License
 This project is licensed under Apache 2.0. See: [LICENSE](LICENSE)
