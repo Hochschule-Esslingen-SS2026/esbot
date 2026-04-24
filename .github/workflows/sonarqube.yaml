@@ -59,7 +59,7 @@ jobs:
           export PATH="$PATH:$GITHUB_WORKSPACE/.sonar/scanner"
 
           dotnet-sonarscanner begin \
-            /k:"EsBot" \ 
+            /k:"EsBot" \
             /d:sonar.token="${{ secrets.SONAR_TOKEN }}" \
             /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}"
 
