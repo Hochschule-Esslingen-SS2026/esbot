@@ -1,0 +1,34 @@
+# Top-most EditorConfig file
+root = true
+
+[*]
+indent_style = space
+indent_size = 4
+insert_final_newline = true
+trim_trailing_whitespace = true
+charset = utf-8
+
+[*.cs]
+
+# Use PascalCase for methods and types
+dotnet_naming_rule.methods_and_types_should_be_pascal_case.severity = suggestion
+dotnet_naming_rule.methods_and_types_should_be_pascal_case.symbols = method_and_type_symbols
+dotnet_naming_rule.methods_and_types_should_be_pascal_case.style = pascal_case_style
+
+# Organize Usings
+dotnet_separate_import_directive_groups = validate
+dotnet_sort_system_usings_first = true
+
+# C# Coding Conventions
+csharp_using_directive_placement = outside_namespace:silent
+csharp_prefer_simple_using_statement = true:suggestion
+csharp_prefer_braces = true:silent
+csharp_style_namespace_declarations = file_scoped:suggestion
+
+# New Line Preferences
+csharp_new_line_before_open_brace = all
+csharp_new_line_before_else = true
+csharp_new_line_before_catch = true
+
+# Formatting - Braces
+checkpoint_complexity_limit = 10
