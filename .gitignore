@@ -8,6 +8,7 @@
 *.userosscache
 *.sln.docstates
 
+secrets.md
 # Build results
 [Bb]in/
 [Oo]bj/
