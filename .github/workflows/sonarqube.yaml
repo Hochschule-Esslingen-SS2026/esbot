@@ -2,7 +2,7 @@ name: Build
 
 on:
   # This enables the manual 'Run workflow' button in the Forgejo UI
-  #workflow_dispatch:
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -66,3 +66,4 @@ jobs:
           dotnet build /p:EnableWindowsTargeting=true /p:IgnoreWindowsTargetingError=true
 
           dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+
