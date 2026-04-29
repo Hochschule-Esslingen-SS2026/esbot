@@ -1,3 +1,4 @@
+Group 4
 <https://github.com/Hochschule-Esslingen-SS2026/esbot/tree/main>
 
 GithubLink
