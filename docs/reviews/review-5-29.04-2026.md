@@ -59,7 +59,7 @@
 | 3 | docs/spec/spec.md | SPEC |
 | 4 | | |
 | 5 | | |
-#TODO add when done
+# TODO add when done
 
 ### 2.3 Reference documents
 
@@ -91,6 +91,14 @@ Suggested values: **Type** — defect, question, suggestion; **Severity** — bl
 |----|-------------------------------------|---------|------|----------|--------|-------|--------------------------|
 | F-001 | <!-- --> | <!-- --> | <!-- --> | <!-- --> | <!-- --> | <!-- --> | <!-- --> |
 | F-002 | <!-- --> | <!-- --> | <!-- --> | <!-- --> | <!-- --> | <!-- --> | <!-- --> |
+
+backedn/app/models/base On projects of larger scope on class one file
+backend/app/services/answer_evaluation_service.py why not return a http error
+backend/app/services/answer_evaluation_service.py magic strings
+config.py emtpy
+
+allow_origins=["http://localhost:3000"], can be configureble
+in no test is the real api started and setup not even with mocked components
 
 ---
 
