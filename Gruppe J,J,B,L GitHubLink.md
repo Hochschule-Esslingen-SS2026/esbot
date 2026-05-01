@@ -7,5 +7,5 @@ GithubLink
 | -------------- | ------ |
 | Leon Kirasic   | 777511 |
 | Jan Schröter   | 770437 |
-| Jan Rörhle     | 777840 |
+| Jan Röhrle     | 777840 |
 | Benjamin Supke | 777354 |
