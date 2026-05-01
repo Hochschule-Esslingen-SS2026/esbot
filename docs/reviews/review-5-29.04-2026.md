@@ -59,6 +59,7 @@
 | 3 | docs/spec/spec.md | SPEC |
 | 4 | | |
 | 5 | | |
+
 # TODO add when done
 
 ### 2.3 Reference documents
@@ -85,17 +86,15 @@ As this is a very small review, all Reviwers named will review all Review object
 
 Use one row per finding. Extend the table if your course requires extra columns.
 
-Suggested values: **Type** — defect, question, suggestion; **Severity** — blocking, major, minor, editorial (define team scale); **Status** — open, accepted, rejected, deferred, fixed (update through meeting and rework).
+Suggested values: **Type** — defect, question, suggestion; **Severity** — blocking, major, minor, editorial; **Status** — open, accepted, rejected, deferred, fixed (update through meeting and rework).
 
-| ID | Location (file / section / module) | Summary | Type | Severity | Status | Owner | Notes / meeting decision |
-|----|-------------------------------------|---------|------|----------|--------|-------|--------------------------|
-| F-001 | <!-- --> | <!-- --> | <!-- --> | <!-- --> | <!-- --> | <!-- --> | <!-- --> |
-| F-002 | <!-- --> | <!-- --> | <!-- --> | <!-- --> | <!-- --> | <!-- --> | <!-- --> |
+| ID | Location (file / section / module) | Summary | Type | Severity | Status | Notes / meeting decision |
+|----|-------------------------------------|---------|------|----------|--------|--------------------------|
+| F-001 | backedn/app/models/base| On projects of larger scope on class one file | suggestion | minor | open | <!-- --> |
+| F-002 | backend/app/services/answer_evaluation_service.py | The repeated usage of magic strings that are not defined in any Constant | suggestion | minor | open ||
+| F-003 | config.py | Is Empty | suggestion | editorial | open||
 
-backedn/app/models/base On projects of larger scope on class one file
 backend/app/services/answer_evaluation_service.py why not return a http error
-backend/app/services/answer_evaluation_service.py magic strings
-config.py emtpy
 
 allow_origins=["http://localhost:3000"], can be configureble
 in no test is the real api started and setup not even with mocked components
