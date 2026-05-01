@@ -1,26 +1,6 @@
-* The ESBot-oriented **introductory / system description** (equivalent to `docs/esbot.md` or the team’s merged variant)
-* **Functional requirements and specification** (e.g. `docs/spec/requirements.md`, `docs/spec/spec.md`, or Spec Kit output paths used by that team)
-* **Relevant implementation** to date (e.g. backend domain model, unit tests, BDD tests, etc.)
+# Review
 
-### Tasks
-
-1. Assign **review roles** inside your team (e.g. moderator, expert reviewers, recorder/note-taker, author liaison if applicable).
-2. Choose a **review type** (e.g. walkthrough, technical review, inspection) and justify why it fits the artefacts and timebox.
-3. Hold a **preparation** phase: reviewers study the materials; record questions and assumptions. If required, you can ask the other team for clarifications or schedule a meeting to discuss the artefacts and to understand the project.
-4. Run the **review session(s)** using the course review template: log defects, inconsistencies, ambiguities, and improvement suggestions with clear references (file, section, or module).
-5. **Document** the review type, participants, scope, and outcomes in your **own** repository (e.g. `docs/reviews/review-<team-reviewed>-<date>.md` or as a filled template uploaded in the same form as required by Moodle).
-
-**Expected deliverables:**
-* Written evidence of planning (roles, review type, scope, schedule) in your repository.
-* Completed review protocol / issue list using the course template in your repository.
-* Brief summary of major findings and agreed follow-up (if any) in your repository.
-
-<https://github.com/ItsSami19/esbot>
-
-# Review template (inspection / technical review)
-
-**Project / product:** EsBot
-**Review object(s):** ``docs/esbot.md`` ``docs/spec/requirements.md`` ``docs/spec/spec.md`` ``backend/*``
+**Project / product:** EsBot <https://github.com/ItsSami19/esbot>
 **Review type:** Technical Review: As we mostly look at Architecture documents and algorithms.
 **Date (planned / actual):** 2026-04-29/2026-04-29  
 **Moderator:** Jan Schröter
@@ -54,14 +34,17 @@
 
 | # | Review objects | Abbr. |
 |---|----------------|-------|
-| 1 | docs/spec/requirements.md | REQ |
-| 2 | docs/esbot.md | EsBot |
-| 3 | docs/spec/spec.md | SPEC |
-| 4 | backend/*|
-| 5 | `backend/app/db.py`| B-DB |
-| 6 | `backend/app/main.py` | B-MAIN |
-
-# TODO add when done
+| 01 | `docs/spec/requirements.md` | REQ |
+| 02 | `docs/esbot.md` | EsBot |
+| 03 | `docs/spec/spec.md` | SPEC |
+| 04 | `backend/app/db.py`| B-DB |
+| 05 | `backend/app/main.py` | B-MAIN |
+| 06 | `backend/app/models/base.py` | B-Models-Base |
+| 07 | `backend/app/models/__init__.py`|B-Models-Init|
+| 08 | `backend/app/services/answer_evaluation_service.py`| B-Services-Answer|
+| 09 | `backend/app/services/contextualized_response_service.py`|  B-Services-Response|
+| 10 | `backend/app/services/resume_learning_session_service.py`|  B-Services-Resume |
+| 11 | `base.py`| Base |
 
 ### 2.3 Reference documents
 
@@ -93,34 +76,34 @@ As this is a very small review, all Reviwers named will review all Review object
 
 | ID | Location (file / section / module) | Summary | Type | Severity | Status | Owner | Notes / meeting decision |
 |----|-------------------------------------|---------|------|----------|--------|-------|--------------------------|
-| P-001 | `B-DB:14`, `B-MAIN:16`, `backend/app/models/base.py:121`, `backend/app/models/__init__.py:11`, `backend/app/services/answer_evaluation_service.py:49`, `backend/app/services/contextualized_response_service.py:75`, `backend/app/services/resume_learning_session_service.py:48` | Final newline missing at end of file (C0304) in all backend modules | suggestion | editorial | open | | Affects all 7 files |
-| P-002 | `B-DB:1`, `B-MAIN:1`, `backend/app/models/base.py:1`, `backend/app/models/__init__.py:1`, `backend/app/services/answer_evaluation_service.py:1`, `backend/app/services/contextualized_response_service.py:1`, `backend/app/services/resume_learning_session_service.py:1` | Missing module-level docstring (C0114) in all backend modules | suggestion | minor | open | | All 7 modules lack top-level documentation |
-| P-003 | `backend/app/models/base.py:13,18,24,30,43,59,75,93,108`, `backend/app/services/answer_evaluation_service.py:6`, `backend/app/services/contextualized_response_service.py:6`, `backend/app/services/resume_learning_session_service.py:8` | Missing class docstring (C0115) on all model and service classes | suggestion | minor | open | | Affects all 6 domain model classes and all 3 service classes |
-| P-004 | `backend/app/models/base.py:9,55,71,89,104,120`, `B-MAIN:15`, `B-DB:12`, `backend/app/services/answer_evaluation_service.py:11`, `backend/app/services/contextualized_response_service.py:11`, `backend/app/services/resume_learning_session_service.py:12` | Missing function/method docstring (C0116) across all modules | suggestion | minor | open | | Affects utility functions, all `create()` classmethods, service methods, and the health endpoint |
-| P-005 | `backend/app/models/base.py:89` (170 chars), `base.py:90` (165 chars), `base.py:101` (101 chars), `base.py:120` (136 chars), `base.py:121` (126 chars), `backend/app/services/contextualized_response_service.py:38` (107 chars) | Line length exceeds 100 characters (C0301) | suggestion | editorial | open | | `base.py:89-90` are the worst offenders (`QuizItem.create` signature); could be split across lines |
-| P-006 | `backend/app/models/base.py:89` | `QuizItem.create()` has 6 positional arguments, exceeding the recommended maximum of 5 (R0913, R0917) | suggestion | minor | open | | Consider introducing a parameter object or using keyword-only arguments |
-| P-007 | `backend/app/services/answer_evaluation_service.py:6`, `backend/app/services/contextualized_response_service.py:6`, `backend/app/services/resume_learning_session_service.py:8` | Too few public methods on service classes (R0903, 1/2 each) | question | minor | open | | Each service exposes only one public method; may indicate incomplete implementation or that services should be plain functions rather than classes. Note: R0903 for model classes (`base.py`) resolved in venv – SQLModel classmethods are recognised as public methods when stubs are present |
+| P-001 | `B-DB:14`, `B-MAIN:16`, `B-Models-Base:121`, `B-Models-Init:11`, `B-Services-Answer:49`, `B-Services-Response:75`, `B-Services-Resume:48` | Final newline missing at end of file (C0304) in all backend modules | suggestion | editorial | open | | Affects all 7 files |
+| P-002 | `B-DB:1`, `B-MAIN:1`, `B-Models-Base:1`, `B-Models-Init:1`, `B-Services-Answer:1`, `B-Services-Response:1`, `B-Services-Resume:1` | Missing module-level docstring (C0114) in all backend modules | suggestion | minor | open | | All 7 modules lack top-level documentation |
+| P-003 | `B-Models-Base:13,18,24,30,43,59,75,93,108`, `B-Services-Answer:6`, `B-Services-Response:6`, `B-Services-Resume:8` | Missing class docstring (C0115) on all model and service classes | suggestion | minor | open | | Affects all 6 domain model classes and all 3 service classes |
+| P-004 | `B-Models-Base:9,55,71,89,104,120`, `B-MAIN:15`, `B-DB:12`, `B-Services-Answer:11`, `B-Services-Response:11`, `B-Services-Resume:12` | Missing function/method docstring (C0116) across all modules | suggestion | minor | open | | Affects utility functions, all `create()` classmethods, service methods, and the health endpoint |
+| P-005 | `B-Models-Base:89` (170 chars), `Base:90` (165 chars), `Base:101` (101 chars), `Base:120` (136 chars), `Base:121` (126 chars), `B-Services-Response:38` (107 chars) | Line length exceeds 100 characters (C0301) | suggestion | editorial | open | | `Base:89-90` are the worst offenders (`QuizItem.create` signature); could be split across lines |
+| P-006 | `B-Models-Base:89` | `QuizItem.create()` has 6 positional arguments, exceeding the recommended maximum of 5 (R0913, R0917) | suggestion | minor | open | | Consider introducing a parameter object or using keyword-only arguments |
+| P-007 | `B-Services-Answer:6`, `B-Services-Response:6`, `B-Services-Resume:8` | Too few public methods on service classes (R0903, 1/2 each) | question | minor | open | | Each service exposes only one public method; may indicate incomplete implementation or that services should be plain functions rather than classes. Note: R0903 for model classes (`Base`) resolved in venv – SQLModel classmethods are recognised as public methods when stubs are present |
 
 ### Table 2 – mypy Findings (mypy (static type checker))
 
 | ID | Location (file / section / module) | Summary | Type | Severity | Status | Owner | Notes / meeting decision |
 |----|-------------------------------------|---------|------|----------|--------|-------|--------------------------|
-| MY-001 | `backend/app/services/contextualized_response_service.py:26,41,59` | Argument `session_id` passed to `Message.create()` has type `int \| None`; expected `int` (`arg-type`) | defect | major | open | | `UserSession.id` is declared `Optional[int]` (base.py:31); after `db.commit()` + `db.refresh()` the id is always set, but this is not statically guaranteed; a `None`-guard or non-optional id type is needed |
-| MY-002 | `backend/app/services/answer_evaluation_service.py:21` | Argument `quiz_item_id` passed to `SubmittedAnswer.create()` has type `int \| None`; expected `int` (`arg-type`) | defect | major | open | | `QuizItem.id` is `Optional[int]` (base.py:76); same root cause as MY-001 |
-| MY-003 | `backend/app/services/answer_evaluation_service.py:35` | Argument `submitted_answer_id` passed to `EvaluationResult.create()` has type `int \| None`; expected `int` (`arg-type`) | defect | major | open | | `SubmittedAnswer.id` is `Optional[int]` (base.py:94); same root cause as MY-001; after `commit()` + `refresh()` the id is populated but not statically provable |
-| MY-004 | `backend/app/services/resume_learning_session_service.py:40` | Argument 1 to `order_by()` has incompatible type `int`; expected a `ColumnElement` (`arg-type`) | defect | minor | open | | `Message.order` is typed as `int` in the model; mypy resolves it as a plain `int` at the call site instead of the SQLAlchemy `InstrumentedAttribute`. Fix: use `col(Message.order)` or `Message.order.asc()` to produce a proper column expression |
+| MY-001 | `B-Services-Response:26,41,59` | Argument `session_id` passed to `Message.create()` has type `int \| None`; expected `int` (`arg-type`) | defect | major | open | | `UserSession.id` is declared `Optional[int]` (Base:31); after `db.commit()` + `db.refresh()` the id is always set, but this is not statically guaranteed; a `None`-guard or non-optional id type is needed |
+| MY-002 | `B-Services-Answer:21` | Argument `quiz_item_id` passed to `SubmittedAnswer.create()` has type `int \| None`; expected `int` (`arg-type`) | defect | major | open | | `QuizItem.id` is `Optional[int]` (Base:76); same root cause as MY-001 |
+| MY-003 | `B-Services-Answer:35` | Argument `submitted_answer_id` passed to `EvaluationResult.create()` has type `int \| None`; expected `int` (`arg-type`) | defect | major | open | | `SubmittedAnswer.id` is `Optional[int]` (Base:94); same root cause as MY-001; after `commit()` + `refresh()` the id is populated but not statically provable |
+| MY-004 | `B-Services-Resume:40` | Argument 1 to `order_by()` has incompatible type `int`; expected a `ColumnElement` (`arg-type`) | defect | minor | open | | `Message.order` is typed as `int` in the model; mypy resolves it as a plain `int` at the call site instead of the SQLAlchemy `InstrumentedAttribute`. Fix: use `col(Message.order)` or `Message.order.asc()` to produce a proper column expression |
 
 ### Table 3 – Manual Review Findings (Docs vs. Code)
 
 | ID | Location (file / section / module) | Summary | Type | Severity | Status | Owner | Notes / meeting decision |
 |----|-------------------------------------|---------|------|----------|--------|-------|--------------------------|
-| M-001 | `backend/app/services/answer_evaluation_service.py:28`  | `ai_provider.evaluate()` has **no try/except block**. Any exception from the AI component crashes the service. By contrast, `ContextualizedResponseService` does catch `RuntimeError`. Inconsistent error handling violates the requirement that the system "shall handle failures of external AI services gracefully". | defect | major | open | | `ContextualizedResponseService` shows the correct pattern; same pattern must be applied here |
-| M-002 | `backend/app/models/base.py:36` / `docs/spec/spec.md §Assumptions` | `UserSession.user_identifier` is a **required, non-nullable field** (`Field(..., nullable=False)`). The spec explicitly states "No user login or account management is required for MVP; the feature is intentionally anonymous." It is unclear how an anonymous user gets a `user_identifier`. No assignment logic exists anywhere in the backend. | question | major | open | | Clarify: is `user_identifier` a device fingerprint, browser cookie, or session token? Spec and model are contradictory |
-| M-003 | `backend/app/services/contextualized_response_service.py:37` / `docs/spec/requirements.md FR16`, `docs/spec/spec.md FR-006` | `ContextualizedResponseService` only catches `RuntimeError`. Network failures, `ConnectionRefusedError`, `TimeoutError`, and other AI-provider exceptions are **not caught** and will propagate as unhandled 500 errors. FR-006 requires handling "local AI model unavailability". | defect | major | open | | Broaden the except clause or catch a base `Exception`; log unexpected errors |**
+| M-001 | `B-Services-Answer:28`  | `ai_provider.evaluate()` has **no try/except block**. Any exception from the AI component crashes the service. By contrast, `ContextualizedResponseService` does catch `RuntimeError`. Inconsistent error handling violates the requirement that the system "shall handle failures of external AI services gracefully". | defect | major | open | | `ContextualizedResponseService` shows the correct pattern; same pattern must be applied here |
+| M-002 | `B-Models-Base:36` / `SPEC §Assumptions` | `UserSession.user_identifier` is a **required, non-nullable field** (`Field(..., nullable=False)`). The spec explicitly states "No user login or account management is required for MVP; the feature is intentionally anonymous." It is unclear how an anonymous user gets a `user_identifier`. No assignment logic exists anywhere in the backend. | question | major | open | | Clarify: is `user_identifier` a device fingerprint, browser cookie, or session token? Spec and model are contradictory |
+| M-003 | `B-Services-Response:37` / `REQ FR16`, `SPEC FR-006` | `ContextualizedResponseService` only catches `RuntimeError`. Network failures, `ConnectionRefusedError`, `TimeoutError`, and other AI-provider exceptions are **not caught** and will propagate as unhandled 500 errors. FR-006 requires handling "local AI model unavailability". | defect | major | open | | Broaden the except clause or catch a base `Exception`; log unexpected errors |**
 | M-004 | `backedn/app/models/base` | On projects of larger scope on class one file rule | suggestion | minor | open |||
-| M-005 | `backend/app/services/answer_evaluation_service.py` | The repeated usage of magic strings that are not defined in any Constant | suggestion | minor | open |||
+| M-005 | `B-Services-Answer` | The repeated usage of magic strings that are not defined in any Constant | suggestion | minor | open |||
 | M-006 | config.py | Is Empty | suggestion | editorial | open|||
-| M-007 |`backend/app/services/answer_evaluation_service.py` | Why create your own error on not rely on Http errors which are established | question | minor | open |||
+| M-007 |`B-Services-Answer` | Why create your own error on not rely on Http errors which are established | question | minor | open |||
 | M-008 | `B-MAIN` | Corse Settings like `allow_origins=["http://localhost:3000"]` should be configurable | suggestion | minor | open |||
 | M-009 | `backend/tests` | We could not findy any test actually starting a API Server which gets tested. | defect | blocking | open |||
 | M-010 | esbot.md (NFR Performance) | "Normal load" is not defined | defect | major | open | Needs measurable definition |
