@@ -100,48 +100,47 @@ As this is a very small review, all Reviwers named will review all Review object
 | M-001 | `B-Services-Answer:28`  | `ai_provider.evaluate()` has **no try/except block**. Any exception from the AI component crashes the service. By contrast, `ContextualizedResponseService` does catch `RuntimeError`. Inconsistent error handling violates the requirement that the system "shall handle failures of external AI services gracefully". | defect | major | open | | `ContextualizedResponseService` shows the correct pattern; same pattern must be applied here |
 | M-002 | `B-Models-Base:36` / `SPEC §Assumptions` | `UserSession.user_identifier` is a **required, non-nullable field** (`Field(..., nullable=False)`). The spec explicitly states "No user login or account management is required for MVP; the feature is intentionally anonymous." It is unclear how an anonymous user gets a `user_identifier`. No assignment logic exists anywhere in the backend. | question | major | open | | Clarify: is `user_identifier` a device fingerprint, browser cookie, or session token? Spec and model are contradictory |
 | M-003 | `B-Services-Response:37` / `REQ FR16`, `SPEC FR-006` | `ContextualizedResponseService` only catches `RuntimeError`. Network failures, `ConnectionRefusedError`, `TimeoutError`, and other AI-provider exceptions are **not caught** and will propagate as unhandled 500 errors. FR-006 requires handling "local AI model unavailability". | defect | major | open | | Broaden the except clause or catch a base `Exception`; log unexpected errors |**
-| M-004 | `backedn/app/models/base` | On projects of larger scope on class one file rule | suggestion | minor | open |||
+| M-004 | `Base` | On projects of larger scope on class one file rule | suggestion | minor | open |||
 | M-005 | `B-Services-Answer` | The repeated usage of magic strings that are not defined in any Constant | suggestion | minor | open |||
 | M-006 | config.py | Is Empty | suggestion | editorial | open|||
 | M-007 |`B-Services-Answer` | Why create your own error on not rely on Http errors which are established | question | minor | open |||
 | M-008 | `B-MAIN` | Corse Settings like `allow_origins=["http://localhost:3000"]` should be configurable | suggestion | minor | open |||
 | M-009 | `backend/tests` | We could not findy any test actually starting a API Server which gets tested. | defect | blocking | open |||
-| M-010 | esbot.md (NFR Performance) | "Normal load" is not defined | defect | major | open | Needs measurable definition |
-| M-011 | NFR5 | "user-friendly" is subjective | defect | minor | open | Hard to test |
-| M-012 | FR17 | "relevant data" not specified | defect | minor | open | Needs examples |
-| M-013 | Edge Cases | Not linked to requirements explicitly | Improvement | minor | open | Could improve traceability |
-| M-014 | FR-004 | Conflicts with "temporary or persistent" wording | Inconsistency | major | open | Needs alignment |
+| M-010 | `EsBot` |  (NFR Performance) "Normal load" is not defined | defect | major | open || Needs measurable definition |
+| M-011 | `EsBot` | "user-friendly" is subjective | defect | minor | open || Hard to test |
+| M-012 | `EsBot` | "relevant data" not specified | defect | minor | open || Needs examples |
+| M-013 | `SPEC` | Not linked to requirements explicitly | suggesttion | minor | open || Could improve traceability |
+| M-014 | `SPEC` | Conflicts with "temporary or persistent" wording | defect | major | open || Needs alignment |
 
 ## 4. Data Summary (DS)
 
-<!-- Key metrics for this review. Fill after preparation and/or after rework. -->
-
 | Metric | Value | Notes |
 |--------|-------|-------|
-| Size of review object | <!-- e.g. pages, LOC, #requirements --> | <!-- --> |
-| Preparation effort (hours, optional) | <!-- per role --> | <!-- --> |
-| Number of findings (initial) | <!-- --> | <!-- --> |
-| Number of findings after meeting | <!-- --> | <!-- --> |
-| Rework effort (hours, author) | <!-- --> | <!-- --> |
-| Re-inspection required? | <!-- yes / no --> | <!-- --> |
-
----
+| Size of review object | 11 Files | <!-- --> |
+| Preparation effort (hours, optional) | 4 | <!-- --> |
+| Number of findings (initial) | 58 | with sonarqube code smells and no filter |
+| Number of findings after meeting | 21 | <!-- --> |
+| Re-inspection required? | yes | escpecially M-009 is very important|
 
 ## 5. Review Report (RR)
 
 ### 5.1 Summary
 
-<!-- Short executive summary: object reviewed, outcome, overall quality impression. -->
+There are a lott of small code smells. Which are not a big problem, and some scaling issues, if the project should be mainteined for long.
+The most importaant for us is the Missing API test.
+The Steps form the BDD test just access the Classes directly.
+So there is not Network traffic which should be tested aswell.
 
 ### 5.2 Review outcome
 
-* **Review object state after review:** <!-- e.g. accepted with changes, requires re-inspection, not accepted -->
-* **Major risks or themes:** <!-- bullet list -->
+* **Review object state after review:** requires re-inspection
+* **Major risks or themes:**
+  * Missing Full integration Tests.
 
 ### 5.6 Sign-off
 
 | Role | Name | Signature / date |
 |------|------|------------------|
-| Moderator | <!-- --> | <!-- --> |
+| Moderator | Jan S, | Jan S 01.05.2026 |
 
 `Grammtic, translation and text structure improvements with ChatGPT Version 5.3 (01.05.2026 12:20)`
