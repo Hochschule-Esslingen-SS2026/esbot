@@ -19,7 +19,7 @@ public class MessageControllerTests : IClassFixture<ApiFactory>
         _client = factory.CreateClient();
         SeedDatabase();
     }
-    
+
     private void SeedDatabase()
     {
         using var scope = _factory.Services.CreateScope();
@@ -30,7 +30,7 @@ public class MessageControllerTests : IClassFixture<ApiFactory>
         context.Database.EnsureCreated();
 
         // Add fake data
-        context.Messages.Add(new Message {UserSessionId = Guid.NewGuid(), Timestamp = DateTime.UtcNow, Id = Guid.NewGuid(), Content = "John Doe" ,Role = true});
+        context.Messages.Add(new Message(Guid.NewGuid(),true,"John Doe"));
         context.SaveChanges();
     }
 
@@ -42,7 +42,7 @@ public class MessageControllerTests : IClassFixture<ApiFactory>
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-        Assert.Equal("application/json; charset=utf-8", 
+        Assert.Equal("application/json; charset=utf-8",
             response.Content.Headers.ContentType?.ToString());
         var messages = await response.Content.ReadFromJsonAsync<AllMessagesResponse>();
 

@@ -8,9 +8,9 @@ public class UserSessionTests
     public void CreateSession_WithValidData_SetsPropertiesCorrectly()
     {
         // Arrange & Act
-        var session = new UserSession { 
-            ExternalUserId = "user-123", 
-            Id = Guid.NewGuid() 
+        var session = new UserSession {
+            ExternalUserId = "user-123",
+            Id = Guid.NewGuid()
         };
 
         // Assert
@@ -36,11 +36,7 @@ public class UserSessionTests
     {
         // Arrange
         var session = new UserSession { Id = Guid.NewGuid(), ExternalUserId = "test" };
-        var message = new Message {  Id = Guid.NewGuid(), UserSessionId = Guid.NewGuid(), Timestamp = DateTime.UtcNow,
-            Content = "Hello", 
-            Role = true, 
-            UserSession = session 
-        };
+        var message = new Message(session.Id,true,"Hallo");
 
         // Act
         session.Messages.Add(message);
@@ -49,5 +45,4 @@ public class UserSessionTests
         session.Messages.Should().Contain(message);
         message.UserSession.Should().Be(session);
     }
-    
 }

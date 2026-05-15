@@ -13,24 +13,18 @@ public record Message
         Content = content;
         Timestamp = DateTime.UtcNow;
     }
-
-    public Message()
-    {
-        
-    }
-
-    [Key] public required Guid Id { get; init; }
-    
-    [Required]
-    public required Guid UserSessionId { get; set; }
+    [Key] public Guid Id { get; init; }
 
     [Required]
-    public required bool Role { get; set; } // If True User if False AI
+    public Guid UserSessionId { get; set; }
 
     [Required]
-    public required string Content { get; set; }
+    public bool Role { get; set; } // If True User if False AI
 
-    [Required] public required DateTime Timestamp { get; init; }
+    [Required]
+    public string Content { get; set; }
+
+    [Required] public DateTime Timestamp { get; init; }
 
     // Navigation Property
     public UserSession UserSession { get; set; } = null!;

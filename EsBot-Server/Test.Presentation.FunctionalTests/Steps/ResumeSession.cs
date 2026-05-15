@@ -21,7 +21,7 @@ public class ResumeSession
         _context = context;
         _factory = factory;
     }
-    
+
     [Given(@"the database is seeded with messages")]
     public async Task SeedJavaQuestions()
     {
@@ -31,10 +31,10 @@ public class ResumeSession
         {
             db.Messages.AddRange(new List<Message>
             {
-                new() { Id = Guid.NewGuid(), UserSessionId = sessionId, Content = "Bllaaa" , Role = false , Timestamp =  DateTime.Now},
-                new() { Id = Guid.NewGuid(), UserSessionId = sessionId, Content = "Bllaaa1" , Role = false , Timestamp =  DateTime.Now},
-                new() { Id = Guid.NewGuid(), UserSessionId = sessionId, Content = "Bllaaa2" , Role = false , Timestamp =  DateTime.Now},
-                new() { Id = Guid.NewGuid(), UserSessionId = Guid.NewGuid(), Content = "Bllaaa" , Role = false , Timestamp =  DateTime.Now},
+                new( sessionId,false,"Bllaaa"),
+                new( sessionId,false,"Bllaaa1"),
+                new( sessionId,false,"Bllaaa2"),
+                new( sessionId,false,"Bllaaa3"),
             });
         });
     }
@@ -43,7 +43,7 @@ public class ResumeSession
     public async Task WhenTheStudentRequestsAnOldSessionWithSessionId()
     {
         var response = await _client.GetAsync($"API/v1/Session?sessionId={_context.SessionId}");
-        
+
         _context.Response = response;
         _context.ResponseContent = await response.Content.ReadAsStringAsync();
     }
@@ -52,7 +52,7 @@ public class ResumeSession
     public void ThenTheResponseShouldContainAllMessagesWithThatSessionId()
     {
         var messages = Deserialize<IEnumerable<MessageResponse>>(_context.ResponseContent);
-        
+
         messages.Should().NotBeNull();
         messages.Should().HaveCount(3);
         foreach (var message in messages)
@@ -60,13 +60,13 @@ public class ResumeSession
             message.UserSessionId.Should().Be(_context.SessionId);
         }
     }
-    
+
     [When(@"the student request an session with a unknown session-id")]
     public async Task WhenTheStudentRequestAnSessionWithAUnknownSessionId()
     {
         var userSessionId = Guid.NewGuid();
         var response = await _client.GetAsync($"API/v1/Session?id={userSessionId}");
-        
+
         _context.Response = response;
         _context.ResponseContent = await response.Content.ReadAsStringAsync();
     }
@@ -76,8 +76,8 @@ public class ResumeSession
     {
         _context.ResponseContent.Should().Contain(expectedMessage);
     }
-    
-    private T Deserialize<T>(string content) => 
+
+    private T Deserialize<T>(string content) =>
         JsonSerializer.Deserialize<T>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!;
 
 }
