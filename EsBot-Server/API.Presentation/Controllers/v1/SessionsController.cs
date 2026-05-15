@@ -10,15 +10,15 @@ namespace API.Presentation.Controllers.v1;
 [Route("v1/[controller]")]
 public class SessionController : ControllerBase
 {
-    
-    private readonly ISessionManagementService _sessionManagementService;
-    
-    public SessionController(ISessionManagementService  sessionManagementService)
+
+    private readonly IChatService _sessionManagementService;
+
+    public SessionController(IChatService  sessionManagementService)
     {
         _sessionManagementService = sessionManagementService;
     }
 
-    
+
     [HttpGet]
     public async Task<ActionResult<IEnumerable<MessageResponse>>> OldSession([FromQuery] Guid sessionId)
     {
@@ -32,6 +32,6 @@ public class SessionController : ControllerBase
         {
             return StatusCode(404, "did not find your session");
         }
-        
+
     }
 }
