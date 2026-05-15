@@ -9,12 +9,12 @@ public class QuizItemTests
     [Fact]
     public void QuizItem_ShouldLinkToQuizRequest()
     {
-        var request = new QuizRequest { Id = 1, Topic = "Unit Testing" };
-        var item = new QuizItem 
-        { 
-            Id = 10, 
-            QuestionText = "What is a Mock?", 
-            QuizRequest = request 
+        var request = new QuizRequest { Id = Guid.NewGuid(), Topic = "Unit Testing" };
+        var item = new QuizItem
+        {
+            Id = Guid.NewGuid(),
+            QuestionText = "What is a Mock?",
+            QuizRequest = request
         };
 
         request.QuizItems.Add(item);
@@ -29,9 +29,9 @@ public class QuizItemTests
         var item = new QuizItem { QuestionText = string.Empty };
         var ctx = new ValidationContext(item);
         var results = new List<ValidationResult>();
-        
+
         Validator.TryValidateObject(item, ctx, results, true);
-        
+
         results.Should().Contain(r => r.MemberNames.Contains("QuestionText"));
     }
 }

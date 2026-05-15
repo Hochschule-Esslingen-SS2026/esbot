@@ -6,9 +6,9 @@ namespace Core.Data.Entities;
 public record QuizItem
 {
     [Key]
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
-    public int QuizRequestId { get; set; }
+    public Guid QuizRequestId { get; set; }
 
     [Required]
     public string QuestionText { get; set; } = string.Empty;
@@ -18,5 +18,4 @@ public record QuizItem
 
     // Navigation Properties
     public QuizRequest QuizRequest { get; set; } = null!;
-    public SubmittedAnswer? SubmittedAnswer { get; set; }
 }

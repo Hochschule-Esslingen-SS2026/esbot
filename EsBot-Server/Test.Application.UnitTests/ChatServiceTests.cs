@@ -1,40 +1,34 @@
-using Xunit;
-using Moq;
 using AutoMapper;
-using Core.Services;
-using Core.Interfaces.Repositories;
-using Core.Interfaces.Services;
-using Core.Data.Entities;
+using Core.Data.DTOs;
 using Core.Data.DTOs.Requests;
 using Core.Data.DTOs.Responses;
-using Core.Exceptions;
+using Core.Data.Entities;
+using Core.Interfaces.Repositories;
+using Core.Interfaces.Services;
+using Core.Services;
+using FakeItEasy;
 
-namespace Core.Tests.Services;
+namespace Test.Application.UnitTests;
 
 public class ChatServiceTests
 {
-    private readonly Mock<IMapper> _mockMapper;
-    private readonly Mock<ISessionRepository> _mockSessionRepo;
-    private readonly Mock<IMessageRepository> _mockMessageRepo;
-    private readonly Mock<ILlmInterface> _mockLlm;
-    private readonly Mock<IQuizRepository> _mockQuizRepo;
+    private readonly IMapper _fakeMapper;
+    private readonly ISessionRepository _fakeSessionRepo;
+    private readonly ILlmInterface _fakeLlm;
     private readonly ChatService _chatService;
 
     public ChatServiceTests()
     {
-        _mockMapper = new Mock<IMapper>();
-        _mockSessionRepo = new Mock<ISessionRepository>();
-        _mockMessageRepo = new Mock<IMessageRepository>();
-        _mockLlm = new Mock<ILlmInterface>();
-        _mockQuizRepo = new Mock<IQuizRepository>();
+        // Initializing Fakes using FakeItEasy
+        _fakeMapper = A.Fake<IMapper>();
+        _fakeSessionRepo = A.Fake<ISessionRepository>();
+        _fakeLlm = A.Fake<ILlmInterface>();
 
         // System Under Test (SUT)
         _chatService = new ChatService(
-            _mockMapper.Object,
-            _mockSessionRepo.Object,
-            _mockMessageRepo.Object,
-            _mockLlm.Object,
-            _mockQuizRepo.Object
+            _fakeMapper,
+            _fakeSessionRepo,
+            _fakeLlm
         );
     }
 
@@ -51,24 +45,26 @@ public class ChatServiceTests
         Assert.NotNull(result);
         Assert.Equal(userId, result.ExternalUserId);
 
-        // Verify Interaction with dependency
-        _mockSessionRepo.Verify(r => r.AddSession(It.Is<UserSession>(s => s.ExternalUserId == userId)), Times.Once);
+        // Asserting interaction using FakeItEasy syntax
+        A.CallTo(() => _fakeSessionRepo.AddSession(A<UserSession>.That.Matches(s => s.ExternalUserId == userId)))
+            .MustHaveHappenedOnceExactly();
     }
 
     [Fact]
     public async Task AskQuestion_Success_ShouldStoreMessageAndResponse()
     {
         // Arrange
-        var request = new QuestionRequest { Content = "What is Mocking?", UserSessionId = Guid.NewGuid() };
-        var messageEntity = new Message { Content = "What is Mocking?", UserSessionId = request.UserSessionId };
+        var request = new QuestionRequest { Question = "What is Mocking?", UserSessionId = Guid.NewGuid() };
+        var messageEntity = new Message(request.UserSessionId, true, "What is Mocking");
         var llmStringResponse = "Mocking replaces dependencies.";
-        var mappedLlmMessage = new Message { Content = llmStringResponse, UserSessionId = request.UserSessionId };
-        var finalResponse = new MessageResponse { Content = llmStringResponse };
+        var mappedLlmMessage = new Message (request.UserSessionId, true, llmStringResponse);
+        var finalResponse = new MessageResponse { Id = Guid.NewGuid(), UserSessionId = request.UserSessionId, Content = llmStringResponse, Role = true , Timestamp =  DateTime.Now };
 
-        _mockMapper.Setup(m => m.Map<Message>(request)).Returns(messageEntity);
-        _mockLlm.Setup(l => l.Ask(messageEntity.Content)).ReturnsAsync(llmStringResponse);
-        _mockMapper.Setup(m => m.Map<Message>(llmStringResponse)).Returns(mappedLlmMessage);
-        _mockMapper.Setup(m => m.Map<MessageResponse>(mappedLlmMessage)).Returns(finalResponse);
+        // Configuring behavior
+        A.CallTo(() => _fakeMapper.Map<Message>(request)).Returns(messageEntity);
+        A.CallTo(() => _fakeLlm.Ask(messageEntity.Content)).Returns(llmStringResponse);
+        A.CallTo(() => _fakeMapper.Map<Message>(llmStringResponse)).Returns(mappedLlmMessage);
+        A.CallTo(() => _fakeMapper.Map<MessageResponse>(mappedLlmMessage)).Returns(finalResponse);
 
         // Act
         var result = await _chatService.AskQuestion(request);
@@ -77,25 +73,25 @@ public class ChatServiceTests
         Assert.NotNull(result);
         Assert.Equal(llmStringResponse, result.Content);
 
-        // Verify Interactions: checked that both user prompt and LLM answer were persisted
-        _mockMessageRepo.Verify(r => r.AddMessage(messageEntity), Times.Once);
-        _mockMessageRepo.Verify(r => r.AddMessage(mappedLlmMessage), Times.Once);
+        // Verify that both user prompt and LLM answer were persisted
+        A.CallTo(() => _fakeSessionRepo.AddMessage(messageEntity)).MustHaveHappenedOnceExactly();
+        A.CallTo(() => _fakeSessionRepo.AddMessage(mappedLlmMessage)).MustHaveHappenedOnceExactly();
     }
 
     [Fact]
     public async Task AskQuestion_LLMFailure_ShouldHandleGracefullyAndReturnFallback()
     {
         // Arrange
-        var request = new QuestionRequest { Content = "Break Me", UserSessionId = Guid.NewGuid() };
-        var messageEntity = new Message { Content = "Break Me", UserSessionId = request.UserSessionId };
-        var finalResponse = new MessageResponse { Content = "The AI service is currently unavailable. Please try again later." };
+        var request = new QuestionRequest { Question = "Break Me", UserSessionId = Guid.NewGuid() };
+        var messageEntity = new Message(request.UserSessionId, true, "Break Me");
+        var finalResponse = new MessageResponse { Id = Guid.NewGuid(), UserSessionId = request.UserSessionId, Content ="The AI service is currently unavailable. Please try again later." , Role = true , Timestamp =  DateTime.Now };
 
-        _mockMapper.Setup(m => m.Map<Message>(request)).Returns(messageEntity);
+        A.CallTo(() => _fakeMapper.Map<Message>(request)).Returns(messageEntity);
 
-        // Stub the LLM to throw an exception mimicking failure
-        _mockLlm.Setup(l => l.Ask(It.IsAny<string>())).ThrowsAsync(new Exception("API Timeout"));
+        // Simulating dependency exception throwing
+        A.CallTo(() => _fakeLlm.Ask(A<string>._)).Throws(new Exception("API Timeout"));
 
-        _mockMapper.Setup(m => m.Map<MessageResponse>(It.Is<Message>(msg => msg.Content.Contains("unavailable"))))
+        A.CallTo(() => _fakeMapper.Map<MessageResponse>(A<Message>.That.Matches(msg => msg.Content.Contains("unavailable"))))
             .Returns(finalResponse);
 
         // Act
@@ -110,21 +106,24 @@ public class ChatServiceTests
     public async Task RequestQuiz_Success_ShouldGenerateAndSaveQuiz()
     {
         // Arrange
-        var requestDto = new CreateQuizRequest { Topic = "Design Patterns" };
+        var UserSessionId = Guid.NewGuid();
+        var requestDto = new CreateQuizRequest { UserSessionId = UserSessionId, Topic = "Design Patterns" };
         var quizRequestEntity = new QuizRequest { Topic = "Design Patterns" };
-        var mockLlmQuizResult = new QuizResponse { Items = new List<QuizItem> { new QuizItem { Question = "Define Mocking" } } };
-        var expectedResponse = new QuizRequestResponse { Topic = "Design Patterns" };
+        var mockLlmQuizResult = new Quiz {Topic = "Desing Patterns", Items = [new() {QuestionText = "Define Mocking" }
+            ]
+        };
+        var expectedResponse = new QuizRequestResponse { Id = A.Dummy<Guid>(), Topic = "Desing Patterns", QuizItems = new List<QuizItemResponse> { new QuizItemResponse { Id = 0, QuestionText = "Define Mocking" } } };
 
-        _mockMapper.Setup(m => m.Map<QuizRequest>(requestDto)).Returns(quizRequestEntity);
-        _mockLlm.Setup(l => l.CreateQuiz(quizRequestEntity)).ReturnsAsync(mockLlmQuizResult);
-        _mockMapper.Setup(m => m.Map<QuizRequestResponse>(quizRequestEntity)).Returns(expectedResponse);
+        A.CallTo(() => _fakeMapper.Map<QuizRequest>(requestDto)).Returns(quizRequestEntity);
+        A.CallTo(() => _fakeLlm.CreateQuiz(quizRequestEntity)).Returns(mockLlmQuizResult);
+        A.CallTo(() => _fakeMapper.Map<QuizRequestResponse>(quizRequestEntity)).Returns(expectedResponse);
 
         // Act
         var result = await _chatService.RequestQuiz(requestDto);
 
         // Assert
         Assert.NotNull(result);
-        _mockQuizRepo.Verify(r => r.AddQuizRequest(quizRequestEntity), Times.Once);
+        A.CallTo(() => _fakeSessionRepo.AddQuizRequest(quizRequestEntity)).MustHaveHappenedOnceExactly();
     }
 
     [Fact]
@@ -133,7 +132,8 @@ public class ChatServiceTests
         // Arrange
         var request = new AnswerEvaluationRequest { QuestionText = "1+1?", UserAnswer = "2" };
         var expectedFeedback = "Correct response!";
-        _mockLlm.Setup(l => l.Evaluate(request.QuestionText, request.UserAnswer)).ReturnsAsync(expectedFeedback);
+
+        A.CallTo(() => _fakeLlm.Evaluate(request.QuestionText, request.UserAnswer)).Returns(expectedFeedback);
 
         // Act
         var result = await _chatService.EvaluateAnswer(request);

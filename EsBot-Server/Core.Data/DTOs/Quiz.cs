@@ -4,6 +4,6 @@ namespace Core.Data.DTOs;
 
 public record Quiz
 {
-    public QuizItem[] Items { get; set; }
-    public string Question { get; set; }
+    public required QuizItem[] Items { get; set; }
+    public required string Topic { get; set; }
 }

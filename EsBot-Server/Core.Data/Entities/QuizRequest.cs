@@ -5,7 +5,7 @@ namespace Core.Data.Entities;
 public record QuizRequest
 {
     [Key]
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
     public Guid UserSessionId { get; set; }
 

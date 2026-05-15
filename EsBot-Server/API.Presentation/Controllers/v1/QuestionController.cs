@@ -10,9 +10,9 @@ namespace API.Presentation.Controllers.v1;
 [Route("v1/[controller]")]
 public class QuestionController : ControllerBase
 {
-    private readonly IQuestionManagementService _questionManagementService;
+    private readonly IChatService _questionManagementService;
 
-    public QuestionController(IQuestionManagementService  questionManagementService)
+    public QuestionController(IChatService  questionManagementService)
     {
         _questionManagementService = questionManagementService;
     }
@@ -30,6 +30,6 @@ public class QuestionController : ControllerBase
         {
             return StatusCode(524, "LLM timeout");
         }
-        
+
     }
 }

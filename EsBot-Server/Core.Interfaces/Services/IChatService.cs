@@ -6,11 +6,10 @@ namespace Core.Interfaces.Services;
 
 public interface IChatService
 {
-    public UserSession CreateNewSession(); //TODO how makes it
+    public Task<UserSession> CreateNewSession(string externalUserId);
 
-    public MessageResponse AskAQuestion(QuestionRequest message);
-    public QuizRequest AskAQuizRequest(QuizRequest request);
-    public EvaluationResult EvaluateAnswer(QuestionRequest question);
-
-
+    public Task<MessageResponse> AskQuestion(QuestionRequest question);
+    public Task<QuizRequestResponse> RequestQuiz(CreateQuizRequest request);
+    public Task<IEnumerable<MessageResponse>> GetSession(Guid sessionId);
+    public Task<EvaluationResultResponse> EvaluateAnswer(AnswerEvaluationRequest request);
 }

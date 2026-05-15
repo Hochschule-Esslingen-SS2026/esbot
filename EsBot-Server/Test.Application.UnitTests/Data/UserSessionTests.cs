@@ -8,10 +8,7 @@ public class UserSessionTests
     public void CreateSession_WithValidData_SetsPropertiesCorrectly()
     {
         // Arrange & Act
-        var session = new UserSession {
-            ExternalUserId = "user-123",
-            Id = Guid.NewGuid()
-        };
+        var session = new UserSession("user-123");
 
         // Assert
         session.ExternalUserId.Should().Be("user-123");
@@ -22,7 +19,7 @@ public class UserSessionTests
     public void UserSession_MissingExternalUserId_ShouldFailValidation()
     {
         // Arrange
-        var session = new UserSession { ExternalUserId = null! };
+        var session = new UserSession( null!);
 
         // Act
         var errors = Data.ValidationHelper.ValidateModel(session);
@@ -35,7 +32,7 @@ public class UserSessionTests
     public void Relationship_MessageAndSession_ShouldBeBidirectional()
     {
         // Arrange
-        var session = new UserSession { Id = Guid.NewGuid(), ExternalUserId = "test" };
+        var session = new UserSession ("test");
         var message = new Message(session.Id,true,"Hallo");
 
         // Act
@@ -43,6 +40,6 @@ public class UserSessionTests
 
         // Assert
         session.Messages.Should().Contain(message);
-        message.UserSession.Should().Be(session);
+        message.UserSessionId.Should().Be(session.Id);
     }
 }

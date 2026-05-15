@@ -12,8 +12,6 @@ public class ApplicationDbContext : DbContext
     public DbSet<Message> Messages { get; set; }
     public DbSet<QuizRequest> QuizRequests { get; set; }
     public DbSet<QuizItem> QuizItems { get; set; }
-    public DbSet<SubmittedAnswer> SubmittedAnswers { get; set; }
-    public DbSet<EvaluationResult> EvaluationResults { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -36,20 +34,22 @@ public class ApplicationDbContext : DbContext
             .WithMany(r => r.QuizItems)
             .HasForeignKey(i => i.QuizRequestId);
 
-        // 4. QuizItem to SubmittedAnswer (One-to-One)
-        modelBuilder.Entity<SubmittedAnswer>()
-            .HasOne(a => a.QuizItem)
-            .WithOne(i => i.SubmittedAnswer)
-            .HasForeignKey<SubmittedAnswer>(a => a.QuizItemId);
-
-        // 5. SubmittedAnswer to EvaluationResult (One-to-One)
-        modelBuilder.Entity<EvaluationResult>()
-            .HasOne(e => e.SubmittedAnswer)
-            .WithOne(a => a.Evaluation)
-            .HasForeignKey<EvaluationResult>(e => e.SubmittedAnswerId);
-
         // Indexing for Performance (NFR-2)
         modelBuilder.Entity<UserSession>()
             .HasIndex(s => s.ExternalUserId);
+
+        // Configure UserSession -> Messages cascade
+        modelBuilder.Entity<UserSession>()
+            .HasMany(s => s.Messages)
+            .WithOne(m => m.UserSession) // Assumes Message has a 'UserSession' or 'UserSessionId' property
+            .HasForeignKey(m => m.UserSessionId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        // Configure UserSession -> QuizRequests cascade
+        modelBuilder.Entity<UserSession>()
+            .HasMany(s => s.QuizRequests)
+            .WithOne(q => q.UserSession) // Assumes QuizRequest has a 'UserSession' or 'UserSessionId' property
+            .HasForeignKey(q => q.UserSessionId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

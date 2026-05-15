@@ -8,12 +8,10 @@ public static class CoreDependencyInjection
 {
     public static IServiceCollection AddCoreServices(this IServiceCollection services)
     {
-        services.AddScoped<IQuestionManagementService, QuestionManagementService>();
-        services.AddScoped<IQuizManagementService, QuizManagementService>();
-        services.AddScoped<ISessionManagementService, SessionManagementService>();
-        
+        services.AddScoped<IChatService, ChatService>();
+
         services.AddAutoMapper(cfg => {},typeof(IApplicationAssemblyMarker).Assembly);
-        
+
         return services;
     }
 }

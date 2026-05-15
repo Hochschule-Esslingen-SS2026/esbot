@@ -11,7 +11,7 @@ public record Message
         UserSessionId = userSessionId;
         Role = role;
         Content = content;
-        Timestamp = DateTime.UtcNow;
+        CreatedAt = DateTime.UtcNow;
     }
     [Key] public Guid Id { get; init; }
 
@@ -24,7 +24,7 @@ public record Message
     [Required]
     public string Content { get; set; }
 
-    [Required] public DateTime Timestamp { get; init; }
+    [Required] public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     // Navigation Property
     public UserSession UserSession { get; set; } = null!;

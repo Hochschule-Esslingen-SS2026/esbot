@@ -1,3 +1,4 @@
+using Core.Data;
 using Core.Exceptions;
 using Core.Interfaces.Repositories;
 using Core.Interfaces.Services;
@@ -17,24 +18,23 @@ public static class InfrastructureDependencyInjection
     {
         public IServiceCollection AddInfrastructureServices()
         {
-            services.AddScoped<IMessageRepository, MessageRepository>();
             services.AddScoped<ILlmInterface, LlmInterface>();
-            services.AddScoped<IQuizRepository, QuizRepository>();
+            services.AddScoped<ISessionRepository, SessionRepository>();
             return services;
         }
 
         public IServiceCollection AddDataBase(IConfiguration configuration, ILogger logger)
         {
-        
+
             var connectionString = configuration.GetConnectionString("DefaultConnection");
-        
+
             if (string.IsNullOrWhiteSpace(connectionString))
             {
                 logger.LogCritical("DATABASE STARTUP ERROR: 'DefaultConnection' string is missing.");
-            
+
                 throw new RequirementException("Database connection string is required for startup.");
             }
-        
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(connectionString,
                     b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
@@ -54,7 +54,7 @@ public static class InfrastructureDependencyInjection
             {
                 throw new RequirementException("Database is reachable but connection was refused.");
             }
-        
+
             logger.LogInformation("Database connection verified successfully.");
         }
         catch (Exception ex)

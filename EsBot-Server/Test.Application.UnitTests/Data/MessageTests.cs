@@ -12,7 +12,7 @@ public class MessageTests
 
         message.Content.Should().Be("Explain AI");
         message.Role.Should().Be(true);
-        message.Timestamp.Should().BeBefore(DateTime.UtcNow.AddSeconds(1));
+        message.CreatedAt.Should().BeBefore(DateTime.UtcNow.AddSeconds(1));
     }
 
     [Fact]

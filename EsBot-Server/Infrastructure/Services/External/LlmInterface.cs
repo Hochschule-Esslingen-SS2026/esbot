@@ -5,7 +5,7 @@ using Core.Interfaces.Services;
 
 namespace Infrastructure.Services.External;
 
-public class LlmInterface(IQuizRepository quizRepository): ILlmInterface
+public class LlmInterface: ILlmInterface
 {
     public async Task<string> Ask(string message)
     {
@@ -16,7 +16,7 @@ public class LlmInterface(IQuizRepository quizRepository): ILlmInterface
     {
         return new Quiz
         {
-            Question = quiz.Topic,
+            Topic = quiz.Topic,
             Items = new[]
             {
                 new Core.Data.Entities.QuizItem { QuestionText = $"What is a class in {quiz.Topic}?" },
@@ -24,5 +24,10 @@ public class LlmInterface(IQuizRepository quizRepository): ILlmInterface
                 new Core.Data.Entities.QuizItem { QuestionText = $"What is encapsulation in {quiz.Topic}?" }
             }
         };
+    }
+
+    public async Task<string> Evaluate(string questionText, string userAnswer)
+    {
+        return "Not Mocked normal answer Correct";
     }
 }

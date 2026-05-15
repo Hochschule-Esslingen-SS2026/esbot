@@ -1,6 +1,7 @@
 namespace Core.Data.DTOs.Responses;
 
-public class EvaluationResultResponse
+public record EvaluationResultResponse
 {
-    
+    public string Feedback;
+    public bool IsCorrect;
 }

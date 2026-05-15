@@ -9,9 +9,9 @@ namespace API.Presentation.Controllers.v1;
 [Route("v1/[controller]")]
 public class QuizController : ControllerBase
 {
-    private readonly IQuizManagementService _quizManagementService;
+    private readonly IChatService _quizManagementService;
 
-    public QuizController(IQuizManagementService quizManagementService)
+    public QuizController(IChatService quizManagementService)
     {
         _quizManagementService = quizManagementService;
     }
