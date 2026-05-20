@@ -8,7 +8,7 @@
 
 | Parameter | Class ID | Class Type | Partition Description | Representative Test Value |
 | --- | --- | --- | --- | --- |
-| `topic` | EC-T-1 | Valid | Length between 3 and 100 characters | "Software Testing" |
+| `topic` | EC-T-1 | Valid | Length inclusive between 3 and 100 characters | "Software Testing" |
 | `topic` | EC-T-2 | Invalid | Length too short (< 3) | "AI" |
 | `topic` | EC-T-3 | Invalid | Length too long (> 100) | [101 'A' characters] |
 
