@@ -13,6 +13,11 @@ public record Message
         Content = content;
         CreatedAt = DateTime.UtcNow;
     }
+
+    public Message()
+    {
+
+    }
     [Key] public Guid Id { get; init; }
 
     [Required]
