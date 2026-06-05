@@ -12,7 +12,7 @@ public class QuestionController : ControllerBase
 {
     private readonly IChatService _questionManagementService;
 
-    public QuestionController(IChatService  questionManagementService)
+    public QuestionController(IChatService questionManagementService)
     {
         _questionManagementService = questionManagementService;
     }

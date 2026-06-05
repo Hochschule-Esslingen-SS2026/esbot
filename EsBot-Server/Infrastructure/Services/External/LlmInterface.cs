@@ -5,7 +5,7 @@ using Core.Interfaces.Services;
 
 namespace Infrastructure.Services.External;
 
-public class LlmInterface: ILlmInterface
+public class LlmInterface : ILlmInterface
 {
     public async Task<string> Ask(string message)
     {

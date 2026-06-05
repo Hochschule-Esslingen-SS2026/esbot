@@ -57,8 +57,8 @@ public class ChatServiceTests
         var request = new QuestionRequest { Question = "What is Mocking?", UserSessionId = Guid.NewGuid() };
         var messageEntity = new Message(request.UserSessionId, true, "What is Mocking");
         var llmStringResponse = "Mocking replaces dependencies.";
-        var mappedLlmMessage = new Message (request.UserSessionId, true, llmStringResponse);
-        var finalResponse = new MessageResponse { Id = Guid.NewGuid(), UserSessionId = request.UserSessionId, Content = llmStringResponse, Role = true , Timestamp =  DateTime.Now };
+        var mappedLlmMessage = new Message(request.UserSessionId, true, llmStringResponse);
+        var finalResponse = new MessageResponse { Id = Guid.NewGuid(), UserSessionId = request.UserSessionId, Content = llmStringResponse, Role = true, Timestamp = DateTime.Now };
 
         // Configuring behavior
         A.CallTo(() => _fakeMapper.Map<Message>(request)).Returns(messageEntity);
@@ -84,7 +84,7 @@ public class ChatServiceTests
         // Arrange
         var request = new QuestionRequest { Question = "Break Me", UserSessionId = Guid.NewGuid() };
         var messageEntity = new Message(request.UserSessionId, true, "Break Me");
-        var finalResponse = new MessageResponse { Id = Guid.NewGuid(), UserSessionId = request.UserSessionId, Content ="The AI service is currently unavailable. Please try again later." , Role = true , Timestamp =  DateTime.Now };
+        var finalResponse = new MessageResponse { Id = Guid.NewGuid(), UserSessionId = request.UserSessionId, Content = "The AI service is currently unavailable. Please try again later.", Role = true, Timestamp = DateTime.Now };
 
         A.CallTo(() => _fakeMapper.Map<Message>(request)).Returns(messageEntity);
 
@@ -109,7 +109,10 @@ public class ChatServiceTests
         var UserSessionId = Guid.NewGuid();
         var requestDto = new CreateQuizRequest { UserSessionId = UserSessionId, Topic = "Design Patterns" };
         var quizRequestEntity = new QuizRequest { Topic = "Design Patterns" };
-        var mockLlmQuizResult = new Quiz {Topic = "Desing Patterns", Items = [new() {QuestionText = "Define Mocking" }
+        var mockLlmQuizResult = new Quiz
+        {
+            Topic = "Desing Patterns",
+            Items = [new() {QuestionText = "Define Mocking" }
             ]
         };
         var expectedResponse = new QuizRequestResponse { Id = A.Dummy<Guid>(), Topic = "Desing Patterns", QuizItems = new List<QuizItemResponse> { new QuizItemResponse { Id = Guid.NewGuid(), QuestionText = "Define Mocking" } } };

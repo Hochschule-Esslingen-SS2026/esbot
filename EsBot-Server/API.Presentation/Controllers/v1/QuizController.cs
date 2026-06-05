@@ -1,7 +1,7 @@
-using Core.Interfaces.Services;
-using Microsoft.AspNetCore.Mvc;
 using Core.Data.DTOs.Requests;
 using Core.Data.DTOs.Responses;
+using Core.Interfaces.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace API.Presentation.Controllers.v1;
 

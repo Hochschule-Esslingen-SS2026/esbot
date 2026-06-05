@@ -10,7 +10,7 @@ public static class CoreDependencyInjection
     {
         services.AddScoped<IChatService, ChatService>();
 
-        services.AddAutoMapper(cfg => {},typeof(IApplicationAssemblyMarker).Assembly);
+        services.AddAutoMapper(cfg => { }, typeof(IApplicationAssemblyMarker).Assembly);
 
         return services;
     }

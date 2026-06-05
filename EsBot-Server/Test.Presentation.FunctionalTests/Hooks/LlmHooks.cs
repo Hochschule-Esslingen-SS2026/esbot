@@ -1,8 +1,8 @@
 using Core.Interfaces.Services;
-using Test.Presentation.FunctionalTests.Helper;
 using FakeItEasy;
 using Microsoft.Extensions.DependencyInjection;
 using Reqnroll;
+using Test.Presentation.FunctionalTests.Helper;
 
 namespace Test.Presentation.FunctionalTests.Hooks;
 
@@ -33,7 +33,7 @@ public class LlmHooks
             services.AddSingleton(fakeLlm);
         };
     }
-    
+
     [BeforeScenario("@llm-timeout")]
     public void MockTimeout()
     {

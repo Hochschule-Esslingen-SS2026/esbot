@@ -11,9 +11,9 @@ namespace Test.Presentation.FunctionalTests.Helper;
 public class ApiFactory : WebApplicationFactory<Program>
 {
     public string DbName { get; } = Guid.NewGuid().ToString();
-    
+
     public Action<IServiceCollection>? ConfigureTestServicesAction { get; set; }
-    
+
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.ConfigureTestServices(services =>
@@ -28,7 +28,7 @@ public class ApiFactory : WebApplicationFactory<Program>
 
         builder.UseEnvironment("Testing");
     }
-    
+
     public async Task SeedDataAsync<T>(Action<T> seedAction) where T : DbContext
     {
         using var scope = Services.CreateScope();

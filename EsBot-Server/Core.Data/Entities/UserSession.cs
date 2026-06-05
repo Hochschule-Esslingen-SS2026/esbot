@@ -14,7 +14,7 @@ public record UserSession
 
     [Key] public Guid Id { get; set; }
 
-    [Required] [MaxLength(100)] public string ExternalUserId { get; set; }
+    [Required][MaxLength(100)] public string ExternalUserId { get; set; }
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime LastInteractionAt { get; set; } = DateTime.UtcNow;
