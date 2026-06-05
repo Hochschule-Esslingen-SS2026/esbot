@@ -56,7 +56,6 @@ No database service is needed: the integration tests use `Microsoft.EntityFramew
 - **Production database** — all database interactions use the in-memory EF Core provider in tests.
 - **Frontend build** — ESBot currently has no separate frontend build artifact that requires CI validation.
 
-# TODO Überarbeiten
 ## Parity with Local Verification
 
 | Local command | CI step |
@@ -70,5 +69,19 @@ The CI build runs in `Release` mode to match what would be deployed, while local
 1. **SDK version** — confirm `dotnet --version` locally matches the `10.0.x` range.
 2. **Configuration-conditional code** — some code paths differ between `Debug` and `Release` (e.g., `#if DEBUG` guards).
 3. **Environment variables** — CI has no `.env` file or user secrets; confirm tests do not depend on local configuration.
+
+## Exercise 9.2 enhancements
+
+- What action or tool was added
+  - Added **OWASP Dependency-Check** to the GitHub Actions pipeline.
+  - It scans project dependencies for known public vulnerabilities.
+
+- Added value vs. cost
+  - Added value: better security visibility and an artifact report in CI.
+    - Added value: The check improves security by detecting vulnerable libraries in the actual application stack.
+  - Cost: longer pipeline runtime and occasional maintenance for scan configuration or false positives.
+
+- Whether the same check still runs locally
+  - This can be done with the Dependency-Check CLI or a small wrapper script using the same scan arguments as CI.
 
 `Grammtic and sorting improvements with Claude Sonnet Version 4.6 (05.06.2026 13:53)`

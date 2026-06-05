@@ -251,10 +251,8 @@ Commit all deliverables to your repository and submit the repository link via Mo
 
 Ensure the following artefacts are present before submission:
 
-- [ ] `docs/ci/local-verification.md` — local test and linter commands (Phase A)
-- [ ] `.github/workflows/ci.yml` — basic CI (9.1) plus 9.2 enhancement
-- [ ] `docs/ci/pipeline.md` — triggers, runner, environment, local/CI parity, 9.2 rationale
-- [ ] `README.md` — GitHub Actions CI status badge
-- [ ] Green workflow run on the default branch (or documented reason for pending fix)
-
-
+* [X] `docs/ci/local-verification.md` — local test and linter commands (Phase A)
+* [X] `.github/workflows/ci.yml` — basic CI (9.1) plus 9.2 enhancement
+* [X] `docs/ci/pipeline.md` — triggers, runner, environment, local/CI parity, 9.2 rationale
+* [X] `README.md` — GitHub Actions CI status badge
+* [X] Green workflow run on the default branch (or documented reason for pending fix)

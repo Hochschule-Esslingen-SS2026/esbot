@@ -1,5 +1,6 @@
-name: CI
+# Version 1.0.0
 
+name: CI
 on:
     push:
     pull_request:
