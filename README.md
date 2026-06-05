@@ -11,6 +11,7 @@
 </p>
 
 [![Quality Gate Status](https://sonar.braincrush.org/api/project_badges/measure?project=EsBot&metric=alert_status&token=sqb_9cad1c46958e083ff5e5548460edbfdf137ef0de)](https://sonar.braincrush.org/dashboard?id=EsBot)
+[![CI](https://github.com/Hochschule-Esslingen-SS2026/esbot/actions/workflows/ci.yml/badge.svg)](https://github.com/Hochschule-Esslingen-SS2026/esbot/actions/workflows/ci.yml)
 ## ESBot (HSE Esslingen Software Testing Course)
 
 > IMPORTANT: This repository is for educational purposes only. It may contain unfinished, faulty, or even non-executable code used solely for teaching during the Software Testing course. Do not use this repository for any production system.
