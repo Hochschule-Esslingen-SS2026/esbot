@@ -2,9 +2,7 @@
 
 ## Overview
 
-The CI pipeline is defined in [`.github/workflows/ci.yml`](../../.github/workflows/ci.yml) and runs on every push and pull request. It mirrors the local verification steps documented in [`local-verification.md`](./local-verification.md).
-
----
+The CI pipeline is defined in [`.github/workflows/ci.yml`](../../.github/workflows/ci.yml) and runs on every push and pull request. It mirrors one of the local verification steps documented in [`local-verification.md`](./local-verification.md).
 
 ## Triggers
 
@@ -18,9 +16,8 @@ on:
 
 **Why `pull_request`?** Pull request events trigger an additional check on the merge commit, which can differ from the head commit. This ensures that merged code also passes.
 
-**`workflow_dispatch` (not added)?** A manual trigger could be useful for re-running CI on a branch without pushing new commits, but the current scope does not require it. It can be added later without breaking existing behavior.
-# TODO Überarbeiten
----
+**`workflow_dispatch` (not added)?** It is not added because as it is executed with every push no code changed can be introduced in between pushs.
+For rarly used manual test executions or staging scripts we can use this dispatch system.
 
 ## Runner
 
@@ -29,8 +26,6 @@ runs-on: ubuntu-latest
 ```
 
 `ubuntu-latest` is the standard GitHub-hosted runner. It is free for public repositories, well-maintained, and sufficient for building and testing a .NET backend. There is no platform-specific code in ESBot that would require Windows or macOS runners.
-
----
 
 ## Environment Setup
 
@@ -44,8 +39,6 @@ runs-on: ubuntu-latest
 The project targets **net10.0** (as declared in each `.csproj` file). `actions/setup-dotnet@v4` installs the exact SDK version and also caches the NuGet global packages folder automatically via the built-in cache support.
 
 No database service is needed: the integration tests use `Microsoft.EntityFrameworkCore.InMemory`, and the functional tests use `Microsoft.AspNetCore.Mvc.Testing` with an in-process test server. No live LLM is required because all LLM calls are covered by mocks/fakes (as established in Exercise 8).
-
----
 
 ## Jobs and Steps
 
@@ -63,7 +56,6 @@ No database service is needed: the integration tests use `Microsoft.EntityFramew
 - **Production database** — all database interactions use the in-memory EF Core provider in tests.
 - **Frontend build** — ESBot currently has no separate frontend build artifact that requires CI validation.
 
----
 # TODO Überarbeiten
 ## Parity with Local Verification
 
@@ -78,6 +70,5 @@ The CI build runs in `Release` mode to match what would be deployed, while local
 1. **SDK version** — confirm `dotnet --version` locally matches the `10.0.x` range.
 2. **Configuration-conditional code** — some code paths differ between `Debug` and `Release` (e.g., `#if DEBUG` guards).
 3. **Environment variables** — CI has no `.env` file or user secrets; confirm tests do not depend on local configuration.
-4. **File path casing** — Linux runners enforce case-sensitive paths; Windows does not.
 
 `Grammtic and sorting improvements with Claude Sonnet Version 4.6 (05.06.2026 13:53)`
