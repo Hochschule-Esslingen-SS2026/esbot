@@ -23,8 +23,15 @@ public class QuestionController : ControllerBase
         MessageResponse result = null;
         try
         {
-            result = await _questionManagementService.AskQuestion(question);
-            return Ok(result);
+            try
+            {
+                result = await _questionManagementService.AskQuestion(question);
+                return Ok(result);
+            }
+            catch (TimeoutException e)
+            {
+                return StatusCode(524, e.Message);
+            }
         }
         catch (TimeoutException e)
         {

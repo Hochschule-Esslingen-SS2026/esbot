@@ -10,6 +10,8 @@ public record UserSession
         Id = Guid.NewGuid();
         ExternalUserId = externalUserId;
     }
+
+
     [Key] public Guid Id { get; set; }
 
     [Required] [MaxLength(100)] public string ExternalUserId { get; set; }

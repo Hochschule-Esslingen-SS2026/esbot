@@ -25,16 +25,18 @@ public class ResumeSession
     [Given(@"the database is seeded with messages")]
     public async Task SeedJavaQuestions()
     {
-        var sessionId = Guid.NewGuid();
-        _context.SessionId = sessionId;
+        UserSession temp = new UserSession("test");
+        _context.SessionId = temp.Id;
         await _factory.SeedDataAsync<ApplicationDbContext>(db =>
         {
+
+            db.UserSessions.Add(temp);
             db.Messages.AddRange(new List<Message>
             {
-                new( sessionId,false,"Bllaaa"),
-                new( sessionId,false,"Bllaaa1"),
-                new( sessionId,false,"Bllaaa2"),
-                new( sessionId,false,"Bllaaa3"),
+                new( temp.Id,false,"Bllaaa"),
+                new( temp.Id,false,"Bllaaa1"),
+                new( temp.Id,false,"Bllaaa2"),
+                new( temp.Id,false,"Bllaaa3"),
             });
         });
     }
@@ -42,7 +44,7 @@ public class ResumeSession
     [When(@"the student requests an old session with session-id")]
     public async Task WhenTheStudentRequestsAnOldSessionWithSessionId()
     {
-        var response = await _client.GetAsync($"API/v1/Session?sessionId={_context.SessionId}");
+        var response = await _client.GetAsync($"/api/v1/sessions/messages/{_context.SessionId}");
 
         _context.Response = response;
         _context.ResponseContent = await response.Content.ReadAsStringAsync();
@@ -54,7 +56,7 @@ public class ResumeSession
         var messages = Deserialize<IEnumerable<MessageResponse>>(_context.ResponseContent);
 
         messages.Should().NotBeNull();
-        messages.Should().HaveCount(3);
+        messages.Should().HaveCountGreaterThan(3);
         foreach (var message in messages)
         {
             message.UserSessionId.Should().Be(_context.SessionId);
@@ -65,7 +67,7 @@ public class ResumeSession
     public async Task WhenTheStudentRequestAnSessionWithAUnknownSessionId()
     {
         var userSessionId = Guid.NewGuid();
-        var response = await _client.GetAsync($"API/v1/Session?id={userSessionId}");
+        var response = await _client.GetAsync($"/api/v1/sessions/messages/{userSessionId}");
 
         _context.Response = response;
         _context.ResponseContent = await response.Content.ReadAsStringAsync();

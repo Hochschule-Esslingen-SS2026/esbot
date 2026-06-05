@@ -112,7 +112,7 @@ public class ChatServiceTests
         var mockLlmQuizResult = new Quiz {Topic = "Desing Patterns", Items = [new() {QuestionText = "Define Mocking" }
             ]
         };
-        var expectedResponse = new QuizRequestResponse { Id = A.Dummy<Guid>(), Topic = "Desing Patterns", QuizItems = new List<QuizItemResponse> { new QuizItemResponse { Id = 0, QuestionText = "Define Mocking" } } };
+        var expectedResponse = new QuizRequestResponse { Id = A.Dummy<Guid>(), Topic = "Desing Patterns", QuizItems = new List<QuizItemResponse> { new QuizItemResponse { Id = Guid.NewGuid(), QuestionText = "Define Mocking" } } };
 
         A.CallTo(() => _fakeMapper.Map<QuizRequest>(requestDto)).Returns(quizRequestEntity);
         A.CallTo(() => _fakeLlm.CreateQuiz(quizRequestEntity)).Returns(mockLlmQuizResult);

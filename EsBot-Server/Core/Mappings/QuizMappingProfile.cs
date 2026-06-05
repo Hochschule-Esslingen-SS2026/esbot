@@ -10,10 +10,9 @@ public class QuizMappingProfile : Profile
     public QuizMappingProfile()
     {
         CreateMap<CreateQuizRequest, QuizRequest>();
-        
+
         CreateMap<QuizItem, QuizItemResponse>();
-        
-        CreateMap<QuizRequest, QuizRequestResponse>()
-            .ForMember(dest => dest.QuizItems, opt => opt.MapFrom(src => src.QuizItems));
+
+        CreateMap<QuizRequest, QuizRequestResponse>();
     }
 }

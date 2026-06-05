@@ -1,4 +1,5 @@
 using AutoMapper;
+using Core.Data.DTOs;
 using Core.Data.DTOs.Requests;
 using Core.Data.DTOs.Responses;
 using Core.Data.Entities;
@@ -34,6 +35,10 @@ public class ChatService(
             await sessionRepository.AddMessage(answerMessage);
             return mapper.Map<MessageResponse>(answerMessage);
         }
+        catch (TimeoutException e)
+        {
+            throw;
+        }
         catch (Exception ex)
         {
             // Graceful error handling: Fallback response when LLM fails
@@ -45,11 +50,11 @@ public class ChatService(
 
     public async Task<QuizRequestResponse> RequestQuiz(CreateQuizRequest topic)
     {
-        var quizRequest = mapper.Map<QuizRequest>(topic);
+        QuizRequest quizRequest = mapper.Map<QuizRequest>(topic);
 
         try
         {
-            var quiz = await llmInterface.CreateQuiz(quizRequest);
+            Quiz quiz = await llmInterface.CreateQuiz(quizRequest);
             quizRequest.QuizItems = quiz.Items.ToList();
             await sessionRepository.AddQuizRequest(quizRequest);
             return mapper.Map<QuizRequestResponse>(quizRequest);
