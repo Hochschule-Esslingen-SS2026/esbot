@@ -104,7 +104,7 @@ public class SessionRepositoryTests
         // Arrange
         var options = CreateNewContextOptions();
         var session = new UserSession("user-789");
-        var message = new Message (session.Id,true,"Unit testing with fakes");
+        var message = new Message(session.Id, true, "Unit testing with fakes");
 
         using (var context = new ApplicationDbContext(options))
         {
@@ -197,7 +197,7 @@ public class SessionRepositoryTests
         // Arrange
         var options = CreateNewContextOptions();
         var session = new UserSession("user-delete");
-        var message = new Message (session.Id,true,"Temporary data");
+        var message = new Message(session.Id, true, "Temporary data");
 
         using (var context = new ApplicationDbContext(options))
         {

@@ -19,7 +19,7 @@ public class UserSessionTests
     public void UserSession_MissingExternalUserId_ShouldFailValidation()
     {
         // Arrange
-        var session = new UserSession( null!);
+        var session = new UserSession(null!);
 
         // Act
         var errors = Data.ValidationHelper.ValidateModel(session);
@@ -32,8 +32,8 @@ public class UserSessionTests
     public void Relationship_MessageAndSession_ShouldBeBidirectional()
     {
         // Arrange
-        var session = new UserSession ("test");
-        var message = new Message(session.Id,true,"Hallo");
+        var session = new UserSession("test");
+        var message = new Message(session.Id, true, "Hallo");
 
         // Act
         session.Messages.Add(message);

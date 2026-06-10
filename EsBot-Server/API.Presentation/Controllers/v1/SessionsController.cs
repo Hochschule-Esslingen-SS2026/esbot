@@ -90,7 +90,7 @@ public class SessionsController : ControllerBase
     /// <summary>
     /// Retrieves the complete message history for a specified session.
     /// </summary>
-    [HttpGet("{sessionId}/messages")]
+    [HttpGet("messages/{sessionId:guid}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<MessageResponse>))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetSessionHistory(Guid sessionId)

@@ -15,7 +15,7 @@ try
     builder.Logging.ClearProviders();
     builder.Logging.AddConsole();
     // builder.Logging.AddFile("logs/app-{Date}.txt");
-    
+
     builder.Services.AddOpenApi();
 
     builder.Services.AddCors(options =>
@@ -26,7 +26,7 @@ try
                 .AllowAnyMethod()
                 .AllowAnyHeader();
         });
-    
+
         options.AddPolicy(prodCorsPolicy, policy =>
         {
             var origins = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>();
@@ -53,7 +53,7 @@ try
     {
         logger.LogInformation($"Skipping database connection Test in Environment {builder.Environment}");
     }
-    
+
     builder.Services.AddInfrastructureServices();
     builder.Services.AddCoreServices();
 
@@ -91,7 +91,7 @@ try
 catch (RequirementException ex)
 {
     logger.LogCritical("Startup failed: {Message}", ex.Message);
-    Environment.Exit(1); 
+    Environment.Exit(1);
 }
 catch (Exception ex)
 {

@@ -1,4 +1,4 @@
-﻿namespace Test.Infrastructure.IntegrationTests;
+namespace Test.Infrastructure.IntegrationTests;
 
 public class Test
 {

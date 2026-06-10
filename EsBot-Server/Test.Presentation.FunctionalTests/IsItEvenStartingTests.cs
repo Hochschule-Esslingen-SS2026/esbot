@@ -3,7 +3,7 @@ using Test.Presentation.FunctionalTests.Helper;
 
 namespace Test.Presentation.FunctionalTests;
 
-public class IsItEvenStartingTests: IClassFixture<ApiFactory>
+public class IsItEvenStartingTests : IClassFixture<ApiFactory>
 {
     private readonly ApiFactory _factory;
     private readonly HttpClient _client;
@@ -13,7 +13,7 @@ public class IsItEvenStartingTests: IClassFixture<ApiFactory>
         _factory = factory;
         _client = factory.CreateClient();
     }
-    
+
     [Fact]
     public async Task Swagger_Doc_IsAccessible_SmokeTest()
     {
