@@ -225,11 +225,11 @@ Commit all deliverables to your repository and submit the repository link via Mo
 
 Ensure the following artefacts are present before submission:
 
-- [ ] `docs/spec/test-design.md` containing:
-  - Equivalence class tables for all three `QuizRequest` parameters
-  - Boundary value analysis for `topic` and `count`
-  - Decision table for answer evaluation with requirement references
-  - State transition diagram (inline or linked asset)
-  - State transition table (all states × all events)
-  - All-transitions test sequences with requirement references
-  - Reflective comparison section (Exercise 7.3)
+* [X] `docs/spec/test-design.md` containing:
+  * Equivalence class tables for all three `QuizRequest` parameters
+  * Boundary value analysis for `topic` and `count`
+  * Decision table for answer evaluation with requirement references
+  * State transition diagram (inline or linked asset)
+  * State transition table (all states × all events)
+  * All-transitions test sequences with requirement references
+  * Reflective comparison section (Exercise 7.3)
