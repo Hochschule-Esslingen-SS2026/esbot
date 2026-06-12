@@ -102,7 +102,7 @@ public class SessionsController : ControllerBase
         }
         catch (NotFoundException ex)
         {
-            return NotFound(new { error = ex.Message });
+            return NotFound(ex.Message);
         }
     }
 

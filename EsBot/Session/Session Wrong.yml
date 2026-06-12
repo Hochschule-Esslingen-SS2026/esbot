@@ -1,5 +1,5 @@
 info:
-  name: Session
+  name: Session Wrong
   type: http
   seq: 2
 
@@ -10,7 +10,7 @@ http:
     type: json
     data: |-
       {
-        "UserId" : "testID"
+        "bla":"bla"
       }
   auth: inherit
 

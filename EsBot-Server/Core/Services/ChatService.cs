@@ -83,7 +83,7 @@ public class ChatService(
         var userSession = await sessionRepository.GetSession(sessionId);
         if (userSession == null || !userSession.Messages.Any())
         {
-            throw new NotFoundException("Session not found");
+            throw new NotFoundException("No Messages were found for this session");
         }
         return mapper.Map<IEnumerable<MessageResponse>>(userSession.Messages);
     }

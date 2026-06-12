@@ -1,0 +1,15 @@
+info:
+  name: sessionsGetMessages
+  type: http
+  seq: 5
+
+http:
+  method: GET
+  url: "{{URL}}v1/sessions/messages/ae43b475-4fbc-42f9-9fb6-77b8544d"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -21,7 +21,7 @@ public class QuizController : ControllerBase
     public async Task<ActionResult<QuizRequestResponse>> RequestQuiz([FromBody] CreateQuizRequest request)
     {
         if (request.Topic.Equals("NSFW", StringComparison.OrdinalIgnoreCase))
-            return StatusCode(402);
+            return StatusCode(402, "This Topic is NSFW");
 
         var result = await _quizManagementService.RequestQuiz(request);
         return Ok(result);
