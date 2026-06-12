@@ -18,24 +18,18 @@ public class QuestionController : ControllerBase
     }
 
     [HttpPost]
+    [ProducesResponseType(StatusCodes.Status408RequestTimeout)]
     public async Task<ActionResult<MessageResponse>> AskQuestion([FromBody] QuestionRequest question)
     {
         MessageResponse result = null;
         try
         {
-            try
-            {
-                result = await _questionManagementService.AskQuestion(question);
-                return Ok(result);
-            }
-            catch (TimeoutException e)
-            {
-                return StatusCode(524, e.Message);
-            }
+            result = await _questionManagementService.AskQuestion(question);
+            return Ok(result);
         }
         catch (TimeoutException e)
         {
-            return StatusCode(524, "LLM timeout");
+            return StatusCode(408, e.Message);
         }
 
     }

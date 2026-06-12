@@ -17,6 +17,7 @@ public class QuizController : ControllerBase
     }
 
     [HttpPost]
+    [ProducesResponseType(StatusCodes.Status402PaymentRequired)]
     public async Task<ActionResult<QuizRequestResponse>> RequestQuiz([FromBody] CreateQuizRequest request)
     {
         if (request.Topic.Equals("NSFW", StringComparison.OrdinalIgnoreCase))
