@@ -15,18 +15,17 @@ public class ExtraTests : IClassFixture<ApiFactory>
 {
 
     private readonly HttpClient _client;
-    private readonly TestContext _context;
 
     public ExtraTests(ApiFactory factory)
     {
         _client = factory.CreateClient();
         var scope = factory.Services.CreateScope();
-        _context = scope.ServiceProvider.GetRequiredService<TestContext>();
     }
 
     [Fact]
     public async Task HappyPath()
     {
+        //SETUP
         var response = await _client.GetAsync("api/v1/health");
         response.EnsureSuccessStatusCode();
 
@@ -45,9 +44,11 @@ public class ExtraTests : IClassFixture<ApiFactory>
         response = await _client.PostAsJsonAsync($"api/v1/sessions/{sessionId}/messages", questionRequest);
         response.EnsureSuccessStatusCode();
 
+        // EXECUTE
         response = await _client.GetAsync($"api/v1/sessions/messages/{sessionId}");
         response.EnsureSuccessStatusCode();
 
+        //ASSERT
         var messages = Deserialize<IEnumerable<MessageResponse>>(response.Content.ReadAsStringAsync().Result);
         messages.Should().HaveCount(2);
         messages.First().UserSessionId.Should().Be(sessionId);

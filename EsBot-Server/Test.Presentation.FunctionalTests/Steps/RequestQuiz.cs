@@ -41,10 +41,15 @@ public class RequestQuiz
     [Then(@"the System generates a list of questions")]
     public void ThenSystemGeneratesAListOfQuestions()
     {
+        //SETUP
+
+        // EXECUTE
+
         var questions = JsonSerializer.Deserialize<QuizRequestResponse>(
             _context.ResponseContent,
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
+        // ASSSERT
         questions.Should().NotBeNull();
         questions!.QuizItems.Should().NotBeEmpty();
     }
