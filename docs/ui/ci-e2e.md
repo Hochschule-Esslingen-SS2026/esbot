@@ -1,0 +1,78 @@
+# Piupelien Design Docu
+
+``` yaml
+name: E2E Tests
+
+on:
+    workflow_dispatch:
+
+jobs:
+    e2e-tests:
+        runs-on: docker
+```
+
+Runnning on Docker
+
+Now Setting up the Runner by checking out our code
+and installing Node Js and .Net
+
+Installing dependencies
+building .Net Project
+starting dotnet project  and wirting log
+startin frontend
+
+running cypress tests
+
+uploading logs for debugging
+
+``` yaml
+
+        steps:
+            - name: Checkout Code
+              uses: actions/checkout@v4
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "20"
+
+            - name: Set up .NET
+              uses: actions/setup-dotnet@v4
+              with:
+                  dotnet-version: "10.0.x"
+
+            - name: Install Frontend Dependencies
+              run: npm install
+
+            - name: Restore Backend Dependencies
+              run: dotnet restore EsBot-Server/EsBot.sln
+
+            - name: Build Backend
+              run: dotnet build EsBot-Server/EsBot.sln --no-restore --configuration Release
+
+            - name: Start Backend (Background)
+              run: dotnet run --project EsBot-Server/API.Presentation/API.Presentation.csproj --no-build --configuration Release --urls "http://localhost:8080" > backend.log 2>&1 &
+              env:
+                  ASPNETCORE_ENVIRONMENT: Development
+
+            - name: Start Frontend (Background)
+              run: |
+                  cd frontend
+                  python3 -m http.server 3000 > ../frontend.log 2>&1 &
+
+            - name: Run Cypress Tests
+              uses: cypress-io/github-action@v6
+              with:
+                  wait-on: "http://localhost:3000"
+                  wait-on-timeout: 60
+                  command: npm run test:e2e:cypress
+
+            - name: Upload Logs on Failure
+              if: failure()
+              uses: actions/upload-artifact@v4
+              with:
+                  name: logs
+                  path: |
+                      backend.log
+                      frontend.log
+```
