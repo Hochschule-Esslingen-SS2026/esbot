@@ -1,19 +1,13 @@
 # ESBot – Group 4
 ## Project Documentation
 
-## Tech Stack
+## Tech Stack J.S
 
 | Layer | Technology |
 |---|---|
-| **Backend** | .NET (C#) |
+| **Backend** | .NET 10 (C#) |
 | **Database** | PostgreSQL |
-| **ORM / DB Access** | Entity Framework Core (`ApplicationDbContext`) |
-| **API Style** | REST API |
-| **IDE** | JetBrains Rider |
-| **DB Management** | JetBrains DataGrip |
-| **Frontend** | — *(none; API-only prototype)* |
-
-The team deliberately chose not to implement a frontend for the prototype. All interaction with the system is done through the REST API directly (e.g., via tools like Bruno or curl).
+| **Frontend** | FastAPI |
 
 ## Architecture J.S
 
@@ -48,7 +42,11 @@ Data persistence is managed through **Entity Framework Core** using the `Applica
 
 Entities and their relationships are defined as C# model classes and mapped to database tables via EF Core conventions and Fluent API configuration where needed. Database schema changes are managed through **EF Core Migrations**.
 
-## Requirements
+### Database
+
+The **PostgreSQL** database is fully accessible for demonstration and testing purposes. Schema inspection can be done via **JetBrains DataGrip**.
+
+## Requirements Leon
 
 ### Original Requirements
 
@@ -69,31 +67,19 @@ The following functional and non-functional requirements were defined during the
 
 > **Note:** FR 1–8 were implemented successfully, with the exception of **FR 6**. FR 6 was never assigned as an exercise task and was therefore deprioritized and dropped from the prototype scope.
 
-#### Non-Functional Requirements (NFR)
-
-| ID | Description | Status |
-|---|---|---|
-| NFR 1 | UI/UX usability considerations | ⚠️ Considered in design phase; not applied (no frontend) |
-| NFR 2 | UI/UX Performance | ⚠️ Considered in design phase; not applied (no frontend) |
-
-### Deviations & Changes
+### Deviations & Changes Leon
 
 | Requirement | Decision | Reason |
 |---|---|---|
 | FR 6 | Dropped | Never assigned as an exercise; no implementation guidance was provided |
-| NFR 1 & 2 (UI/UX) | Not applied to implementation | The prototype is API-only; UI/UX considerations were only relevant during the early planning phase |
 
-## Tools & Services
+## Tools & Services Leon
 
 ### CI/CD – SonarQube
 
 The project uses **SonarQube** for static code analysis and code quality reporting. This was integrated as part of the CI pipeline.
 
 > SonarQube results are reviewed as part of the presentation demo.
-
-### Database
-
-The **PostgreSQL** database is fully accessible for demonstration and testing purposes. Schema inspection can be done via **JetBrains DataGrip**.
 
 ### Summary Table
 
@@ -104,11 +90,11 @@ The **PostgreSQL** database is fully accessible for demonstration and testing pu
 | JetBrains DataGrip | Database management & inspection |
 | JetBrains Rider | Primary IDE |
 | Entity Framework Core | ORM & database migrations |
-| GitHub / CI Pipeline | Version control & automated builds |
+| ForgeJo / CI Pipeline | Version control & automated builds |
 
 ## Retrospective & Lessons Learned
 
-### Team Organization
+### Team Organization J. R
 
 The team was taken on by **Jan Schröter** but work was distributed informally. This resulted in some organizational chaos, particularly when tasks had dependencies on each other.
 
@@ -116,50 +102,36 @@ One exception: **Jan Röhrle** took on the role of documentation reviewer, ensur
 
 **Roles / responsibilities** were not formally assigned. But came to use naturally.
 
-### Biggest Challenges
+### Biggest Challenges J. R
 
 The most significant challenge was **implementation uncertainty due to late clarification of requirements via exercises**. The team would form an understanding of how a feature should work, begin implementing it, and then — weeks later — receive an exercise that revealed the intended approach was fundamentally different. This led to **complete rewrites** of components, which was both time-consuming and demoralizing.
 
 > *"Having an idea how to implement something, then 2 weeks later getting an exercise which revealed it was meant in a different way — leading to a complete redo."*
 
-### What Worked Well
+### What Worked Well J. R
 
 - **Task distribution** for independent tasks was efficient.
 - The **CI pipeline** proved to be a broadly useful skill — applicable beyond this course to future projects.
 
-### What Didn't Work Well
+### What Didn't Work Well Benni
 
 - **Work distribution broke down** when tasks were dependent on each other, creating blockers.
 - Frequent **refactoring due to new implementation tasks** was tedious and often fell to a single person. After each refactor, the rest of the team had to re-learn the updated system architecture.
+- The last Task 11 was very intensive as a complete ui needed to be made.
 
-### Most Valuable Exercise
+### Most Valuable Exercise Benni
 
 The **CI/CD integration exercise** was rated most valuable by the team, as it introduced tooling and practices directly transferable to professional and personal projects outside this course.
 
-### What the Team Would Do Differently
+### What the Team Would Do Differently Benni
 
 - In a real project: **communicate more closely with the customer** early on to clarify exact requirements — ideally receiving all exercises in advance to prevent rework.
 - Establish **clearer team structure** — even a lightweight hierarchy helps with small, well-scoped problems.
 
-### Suggestions for the Course
+### Suggestions for the Course Benni
 
 1. **Reduce iterative refactoring overhead.** The current exercise format often forces teams to repeatedly restructure their codebase. A higher-level architectural direction given early would reduce wasted effort.
 
 2. **Provide a pre-built UI shell.** A ready-made frontend that sends API requests — where students only need to build the API to make it work — would give teams a clearer target and reduce ambiguity about expected system behavior.
-
-## Documentation Style
-
-Documentation for this project was **primarily driven by the exercise deliverables**. Where additional polish was needed, the team used **AI assistance to improve grammar, spelling, and formatting** while keeping the technical content authored by team members.
-
-## Submission
-
-| Field | Details |
-|---|---|
-| **Submission Platform** | Moodle – HS Esslingen |
-| **Link** | [Moodle Assignment](https://moodle.hs-esslingen.de/moodle/mod/assign/view.php?id=429978) |
-| **Format** | PDF or link to Markdown |
-| **Deadline** | Wednesday, 1 July 2026 – 13:59 |
-
-*ESBot Group 4 – Project Documentation | HS Esslingen*
 
 `Grammtic,translation and sorting improvements with ChatGPT Version 5.3 (10.06.2026 15:45)`
