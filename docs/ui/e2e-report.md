@@ -34,3 +34,5 @@ We observed some potential flakiness related to asynchronous operations, especia
 
 - **How would these tests behave with a real (non-mock) LLM? What would you change?**
   With a real LLM, the tests would be significantly slower and much more flaky due to unpredictable generation times and varying responses (non-determinism). To fix this, I would increase the timeouts substantially or, better yet, configure the backend to use a "mock" LLM provider during E2E test runs to ensure fast, deterministic, and reliable test executions.
+
+`Grammtic, translation and text structure improvements with ChatGPT Version 5.3 (19.06.2026 12:20)`
