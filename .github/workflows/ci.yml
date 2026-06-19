@@ -2,12 +2,11 @@
 
 name: CI
 on:
-    push:
-    pull_request:
+    workflow_dispatch:
 
 jobs:
     test:
-        runs-on: ubuntu-latest
+        runs-on: docker
 
         steps:
             - uses: actions/checkout@v4
@@ -33,7 +32,7 @@ jobs:
                   name: test-results
                   path: "**/*.trx"
     owasp:
-        runs-on: ubuntu-latest
+        runs-on: docker
         steps:
             - uses: actions/checkout@v4
 
