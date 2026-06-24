@@ -70,6 +70,9 @@ try
         logger.LogInformation($"Skipping database connection Test in Environment {app.Environment}");
     }
 
+    app.UsePathBase("/api");
+    app.UseRouting();
+
     if (app.Environment.IsDevelopment() || app.Environment.IsEnvironment("Testing"))
     {
         app.UseCors(devCorsPolicy);
@@ -80,7 +83,6 @@ try
     {
         app.UseCors(prodCorsPolicy);
     }
-    app.UsePathBase("/api");
     app.UseHttpsRedirection();
     app.UseAuthentication();
     app.UseAuthorization();
