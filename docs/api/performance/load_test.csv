@@ -1,3 +1,0 @@
-Label,# Samples,Average,Median,90% Line,95% Line,99% Line,Min,Max,Error %,Throughput,Received KB/sec,Sent KB/sec
-Request Health,4377636,2,1,5,16,36,0,343,"0,000%","12508,53211","3310,36","1588,00"
-TOTAL,4377636,2,1,5,16,36,0,343,"0,000%","12508,53211","3310,36","1588,00"

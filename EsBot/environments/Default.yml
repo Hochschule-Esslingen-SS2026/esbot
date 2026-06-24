@@ -1,4 +1,0 @@
-name: Default
-variables:
-  - name: URL
-    value: http://localhost:8080/api/

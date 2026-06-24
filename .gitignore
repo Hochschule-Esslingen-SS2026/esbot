@@ -311,3 +311,5 @@ $RECYCLE.BIN/
 
 # NFS files
 .nfs*
+
+node_modules
