@@ -1,0 +1,29 @@
+using Core.Data.DTOs.Requests;
+using Core.Data.DTOs.Responses;
+using Core.Interfaces.Services;
+using Microsoft.AspNetCore.Mvc;
+
+namespace API.Presentation.Controllers.v1;
+
+[ApiController]
+[Route("v1/[controller]")]
+public class QuizController : ControllerBase
+{
+    private readonly IChatService _quizManagementService;
+
+    public QuizController(IChatService quizManagementService)
+    {
+        _quizManagementService = quizManagementService;
+    }
+
+    [HttpPost]
+    [ProducesResponseType(StatusCodes.Status402PaymentRequired)]
+    public async Task<ActionResult<QuizRequestResponse>> RequestQuiz([FromBody] CreateQuizRequest request)
+    {
+        if (request.Topic.Equals("NSFW", StringComparison.OrdinalIgnoreCase))
+            return StatusCode(402, "This Topic is NSFW");
+
+        var result = await _quizManagementService.RequestQuiz(request);
+        return Ok(result);
+    }
+}

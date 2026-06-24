@@ -1,0 +1,156 @@
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#E1F5FE', 'edgeLabelBackground':'#ffffff', 'tertiaryColor': '#fff'}}}%%
+flowchart TD
+    %%----------------------------------------------------------
+    %% SOLUTION DEFINITION
+    %%----------------------------------------------------------
+    subgraph Solution ["Project.sln (Simplified Clean Architecture)"]
+        direction TB
+
+        %%----------------------------------------------------------
+        %% PRESENTATION (API)
+        %%----------------------------------------------------------
+        subgraph UI ["Presentation / API"]
+            UIPROJ["Entry Point / Gateway"]
+            subgraph UIFolders ["Key Components"]
+                direction TB
+                Entry["Program.cs<br/>(App Bootstrap)"]
+                Handlers["Controllers / Minimal APIs<br/>(HTTP Endpoints)"]
+                GlobalEx["Exception Middleware<br/>(Global Error Handling)"]
+            end
+        end
+
+        %%----------------------------------------------------------
+        %% APPLICATION (BUSINESS LOGIC)
+        %%----------------------------------------------------------
+        subgraph APP ["Core / Application"]
+            APPPROJ["Business Logic / Use Cases"]
+            subgraph APPFolders ["Key Components"]
+                direction TB
+                Logic["Business Services<br/>(Use Case Handlers)"]
+                Mapping["Mapping Layer<br/>(AutoMapper / Mapster)"]
+            end
+        end
+
+        %%----------------------------------------------------------
+        %% INTERFACESS (ABSTRACTIONS)
+        %%----------------------------------------------------------
+        subgraph INTERFACES ["Core.Interfaces"]
+            CONTPROJ["Abstractions / Boundaries"]
+            subgraph CONTFolders ["Key Components"]
+                direction TB
+                IRepo["Repository Interfaces"]
+                ISrv["Service Interfaces"]
+                IExt["External System Interfaces"]
+            end
+        end
+
+        %%----------------------------------------------------------
+        %% DATA MODELS
+        %%----------------------------------------------------------
+        subgraph DATA ["Core.Data"]
+            DATAPROJ["Data Structures"]
+            subgraph DATAFolders ["Key Components"]
+                direction TB
+                Models["Entities / POCOs"]
+                DTOs["Data Transfer Objects"]
+            end
+        end
+
+        %%----------------------------------------------------------
+        %% DOMAIN ERRORS
+        %%----------------------------------------------------------
+        subgraph ERR ["Core.Exceptions"]
+            ERRPROJ["Domain Error Definitions"]
+            subgraph ERRFolders ["Key Components"]
+                direction TB
+                ExTypes["Custom Domain Exceptions"]
+            end
+        end
+
+        %%----------------------------------------------------------
+        %% INFRASTRUCTURE
+        %%----------------------------------------------------------
+        subgraph INF ["Infrastructure"]
+            INFPROJ["External Implementations"]
+            subgraph INFFolders ["Key Components"]
+                direction TB
+                DB["Database Context / Migrations"]
+                Impl["Repository Implementations"]
+                ThirdParty["External API Clients"]
+            end
+        end
+
+        %%----------------------------------------------------------
+        %% TEST PROJECTS
+        %%----------------------------------------------------------
+        subgraph TESTS ["Testing Suite (/tests)"]
+            direction LR
+                UT["Tests.Unit<br/>(Business Logic w/ Mocks)"]
+                FUNCT["Tests.Functional<br/>(Mock DB)"]
+                HUMAN["A  Human Tester"]
+                IT["Tests.Integration<br/>(DB / Infra)"]
+        end
+    end
+
+    DATABASE@{ shape: cyl, label: "Database" }
+
+    %%----------------------------------------------------------
+    %% STRICT DEPENDENCY FLOW
+    %%----------------------------------------------------------
+    INF ==> DATABASE
+    UI -. "DI Setup Only" .-> INF
+    UI ==> APP
+
+    APP ==> INTERFACES
+    APP ==> ERR
+
+    INTERFACES ==> DATA
+    INF ==> DATA
+    INF ==> INTERFACES
+
+
+
+    %%----------------------------------------------------------
+    %% TEST DEPENDENCY FLOW
+    %%----------------------------------------------------------
+    UT -. "Mocks Interfaces" .-> APP
+    
+    FUNCT -. "Mocks DB" .-> UI
+    FUNCT -. "Mocks DB" .-> APP
+
+    HUMAN -. "Tests" .-> UI
+
+    IT -. "Hits Real DB" .-> INF
+    
+    %%----------------------------------------------------------
+    %% STYLING
+    %%----------------------------------------------------------
+    classDef project fill:#fff,stroke:#333,stroke-width:2px,rx:5,ry:5,color:black,font-weight:bold;
+    classDef folder fill:#F5F5F5,stroke:#777,stroke-width:1px,stroke-dasharray: 5 5,rx:3,ry:3,color:black,font-size:11px;
+    classDef layerBox fill:#fff,stroke-width:1.5px,rx:10,ry:10;
+
+    class UIPROJ,APPPROJ,CONTPROJ,DATAPROJ,ERRPROJ,INFPROJ project;
+    class Entry,Handlers,GlobalEx,Logic,Mapping,IRepo,ISrv,IExt,Models,DTOs,ExTypes,DB,Impl,ThirdParty folder;
+
+    classDef greenLayer fill:#E8F5E9,stroke:#4CAF50,stroke-width:2px;
+    classDef orangeLayer fill:#FFF3E0,stroke:#FF9800,stroke-width:2px;
+    classDef blueLayer fill:#E3F2FD,stroke:#2196F3,stroke-width:2px;
+    classDef yellowLayer fill:#FFFDE7,stroke:#FBC02D,stroke-width:2px;
+    classDef redLayer fill:#FFEBEE,stroke:#E53935,stroke-width:2px;
+    classDef purpleLayer fill:#F3E5F5,stroke:#8E24AA,stroke-width:2px;
+
+    classDef unitStyle fill:#FFF9C4,stroke:#FBC02D,stroke-width:2px;
+    classDef intStyle fill:#C8E6C9,stroke:#4CAF50,stroke-width:2px;
+    classDef archStyle fill:#E1BEE7,stroke:#9C27B0,stroke-width:2px;
+
+    class UI greenLayer;
+    class APP orangeLayer;
+    class INTERFACES blueLayer;
+    class DATA yellowLayer;
+    class ERR redLayer;
+    class INF purpleLayer;
+
+    class UT unitStyle;
+    class IT intStyle;
+    class AT archStyle;
+

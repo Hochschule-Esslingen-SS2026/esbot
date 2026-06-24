@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <IsPackable>false</IsPackable>
+        <RootNamespace>Test.Presentation.FunctionalTests</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="coverlet.collector">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+      <PackageReference Include="xunit.runner.visualstudio"/>
+      <PackageReference Include="FakeItEasy" />
+      <PackageReference Include="FluentAssertions" />
+      <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" />
+      <PackageReference Include="Microsoft.NET.Test.Sdk" />
+      <PackageReference Include="Reqnroll" />
+      <PackageReference Include="Reqnroll.xUnit" />
+      <PackageReference Include="xunit" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\API.Presentation\API.Presentation.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Using Include="Xunit" />
+        <Using Include="FluentAssertions" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Fakes\" />
+    </ItemGroup>
+
+</Project>

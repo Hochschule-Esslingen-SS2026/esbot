@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESBot Interface</title>
+    <meta name="description" content="ESBot Frontend Interface">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>ESBot</h1>
+                <div class="health-badge" data-testid="health-status" id="healthBadge">Checking...</div>
+            </div>
+
+            <div class="session-controls">
+                <input type="text" id="userIdInput" data-testid="user-id-input" placeholder="Enter User ID" />
+                <button id="newSessionBtn" data-testid="new-session-btn" class="primary-btn">New Session</button>
+            </div>
+
+            <div class="session-list-container">
+                <h3>Your Sessions</h3>
+                <ul id="sessionList" data-testid="session-list">
+                    <!-- Session items will be dynamically injected here -->
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <div id="errorBanner" class="error-banner hidden" data-testid="error-banner"></div>
+
+            <div id="sessionView" class="session-view hidden">
+                <div class="tabs">
+                    <button id="tabChat" class="tab active" onclick="switchTab('chat')">Chat</button>
+                    <button id="tabQuiz" class="tab" onclick="switchTab('quiz')">Quiz</button>
+                </div>
+
+                <!-- Chat View -->
+                <div id="chatContainer" class="chat-container">
+                    <div id="messageList" class="message-list" data-testid="message-list">
+                        <!-- Messages will be injected here -->
+                    </div>
+                    <div id="chatLoading" class="chat-loading hidden" data-testid="chat-loading">
+                        <div class="dot-flashing"></div>
+                    </div>
+                    <div class="message-input-area">
+                        <input type="text" id="messageInput" data-testid="message-input" placeholder="Type a message..." />
+                        <button id="sendMessageBtn" data-testid="send-message-btn" class="primary-btn">Send</button>
+                    </div>
+                </div>
+
+                <!-- Quiz View -->
+                <div id="quizContainer" class="quiz-container hidden">
+                    <div class="quiz-setup">
+                        <input type="text" id="quizTopicInput" data-testid="quiz-topic-input" placeholder="Enter Quiz Topic..." />
+                        <button id="generateQuizBtn" data-testid="generate-quiz-btn" class="primary-btn">Generate Quiz</button>
+                    </div>
+                    <div id="quizContent" class="quiz-content hidden">
+                        <h2 id="quizQuestion" data-testid="quiz-question">Question goes here</h2>
+                        <div class="quiz-options">
+                            <button class="quiz-option" id="quizOption0" data-testid="quiz-option-0" onclick="selectOption(0)">Option 0</button>
+                            <button class="quiz-option" id="quizOption1" data-testid="quiz-option-1" onclick="selectOption(1)">Option 1</button>
+                            <button class="quiz-option" id="quizOption2" data-testid="quiz-option-2" onclick="selectOption(2)">Option 2</button>
+                            <button class="quiz-option" id="quizOption3" data-testid="quiz-option-3" onclick="selectOption(3)">Option 3</button>
+                        </div>
+                        <button id="submitAnswerBtn" data-testid="submit-answer-btn" class="primary-btn disabled" disabled>Submit Answer</button>
+                        <div id="quizFeedback" class="quiz-feedback hidden" data-testid="quiz-feedback"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Empty State -->
+            <div id="emptyState" class="empty-state">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                <h2>Welcome to ESBot</h2>
+                <p>Create or select a session to get started.</p>
+            </div>
+        </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

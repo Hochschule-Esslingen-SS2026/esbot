@@ -1,0 +1,23 @@
+info:
+  name: messagespost
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{URL}}v1/sessions/ae43b475-4fbc-42f9-9fb6-77b8544db5bd/messages"
+  body:
+    type: json
+    data: |-
+      {
+        "UserSessionId": "ae43b475-4fbc-42f9-9fb6-77b854b5bd",
+
+        "Question":"Bla?"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

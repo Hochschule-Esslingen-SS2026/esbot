@@ -1,0 +1,29 @@
+{
+  "name": "2026_ss_software-testing_esbot",
+  "version": "1.0.0",
+  "description": "<p align=\"center\">   <img src=\"./assets/esbot_logo.png\" alt=\"ESBot Logo\" width=\"180\" /> </p>",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:e2e:cypress": "cypress run",
+    "test:e2e:cypress:open": "cypress open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hochschule-Esslingen-SS2026/esbot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Hochschule-Esslingen-SS2026/esbot/issues"
+  },
+  "homepage": "https://github.com/Hochschule-Esslingen-SS2026/esbot#readme",
+  "devDependencies": {
+    "cypress": "^15.17.0"
+  }
+}
