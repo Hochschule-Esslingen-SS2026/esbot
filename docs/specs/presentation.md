@@ -54,16 +54,16 @@ The following functional and non-functional requirements were defined during the
 
 #### Functional Requirements (FR)
 
-| ID | Description | Status |
-|---|---|---|
-| FR 1 | *(as defined in exercise)* | ✅ Implemented |
-| FR 2 | *(as defined in exercise)* | ✅ Implemented |
-| FR 3 | *(as defined in exercise)* | ✅ Implemented |
-| FR 4 | *(as defined in exercise)* | ✅ Implemented |
-| FR 5 | *(as defined in exercise)* | ✅ Implemented |
-| FR 6 | *(as defined in exercise)* | ❌ Not implemented |
-| FR 7 | *(as defined in exercise)* | ✅ Implemented |
-| FR 8 | *(as defined in exercise)* | ✅ Implemented |
+| ID | Requirement Name |  Description | Status |
+|---|---|---|---|
+| **FR-1** | **Conversational Interface** |  *(as defined in exercise)* |✅ Implemented |
+| **FR-2** | **Contextual Explanations** |*(as defined in exercise)* | ✅ Implemented |
+| **FR-3** | **Exercise Generation** | *(as defined in exercise)* |✅ Implemented |
+| **FR-4** | **Automated Evaluation** | *(as defined in exercise)* |✅ Implemented |
+| **FR-5** | **Session Persistence** |*(as defined in exercise)* | ✅ Implemented |
+| **FR-6** | **Deep-Dive Prompts** | *(as defined in exercise)* |❌ Not implemented |
+| **FR-7** | **RESTful API Access** | *(as defined in exercise)* |✅ Implemented |
+| **FR-8** | **AI Inference Integration** | *(as defined in exercise)* |✅ Implemented |
 
 > **Note:** FR 1–8 were implemented successfully, with the exception of **FR 6**. FR 6 was never assigned as an exercise task and was therefore deprioritized and dropped from the prototype scope.
 
@@ -78,8 +78,6 @@ The following functional and non-functional requirements were defined during the
 ### CI/CD – SonarQube
 
 The project uses **SonarQube** for static code analysis and code quality reporting. This was integrated as part of the CI pipeline.
-
-> SonarQube results are reviewed as part of the presentation demo.
 
 ### Summary Table
 
