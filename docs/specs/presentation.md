@@ -90,7 +90,7 @@ The project uses **SonarQube** for static code analysis and code quality reporti
 | JetBrains DataGrip | Database management & inspection |
 | JetBrains Rider | Primary IDE |
 | Entity Framework Core | ORM & database migrations |
-| ForgeJo / CI Pipeline | Version control & automated builds |
+| GitHub / CI Pipeline | Version control & automated builds |
 
 ## Retrospective & Lessons Learned
 
