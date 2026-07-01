@@ -1,7 +1,7 @@
 # ESBot – Group 4
 ## Project Documentation
 
-## Tech Stack J.S
+## Tech Stack [J.S.]
 
 | Layer | Technology |
 |---|---|
@@ -9,7 +9,7 @@
 | **Database** | PostgreSQL |
 | **Frontend** | FastAPI |
 
-## Architecture J.S
+## Architecture [J.S.]
 
 ### High-Level Architecture
 ![Image](./Architecture/BackEnd-Architecture.mermaid)
@@ -25,7 +25,7 @@ Project Name | Responsibilities | Dependencies |
 **Core.Data** | Database Entities (POCOs), Enums, and DTOs. | *None* |
 **Core.Exceptions** | Custom domain-specific exception types (e.g., `NotFoundException`). | *None* |
 
-## API Design J.S
+## API Design [J.S.]
 
 The prototype exposes a **RESTful HTTP API** following standard conventions:
 
@@ -36,7 +36,7 @@ The prototype exposes a **RESTful HTTP API** following standard conventions:
 
 State management is handled **server-side** via the database. The API itself is **stateless** — each request contains all information necessary to process it.
 
-## Data Model
+## Data Model [J.S.]
 
 Data persistence is managed through **Entity Framework Core** using the `ApplicationDbContext`. The database runs on **PostgreSQL** and is fully accessible for inspection and testing.
 
@@ -46,7 +46,7 @@ Entities and their relationships are defined as C# model classes and mapped to d
 
 The **PostgreSQL** database is fully accessible for demonstration and testing purposes. Schema inspection can be done via **JetBrains DataGrip**.
 
-## Requirements Leon
+## Requirements [Leon]
 
 ### Original Requirements
 
@@ -67,13 +67,13 @@ The following functional and non-functional requirements were defined during the
 
 > **Note:** FR 1–8 were implemented successfully, with the exception of **FR 6**. FR 6 was never assigned as an exercise task and was therefore deprioritized and dropped from the prototype scope.
 
-### Deviations & Changes Leon
+### Deviations & Changes
 
 | Requirement | Decision | Reason |
 |---|---|---|
 | FR 6 | Dropped | Never assigned as an exercise; no implementation guidance was provided |
 
-## Tools & Services Leon
+## Tools & Services [Leon]
 
 ### CI/CD – SonarQube
 
@@ -92,7 +92,7 @@ The project uses **SonarQube** for static code analysis and code quality reporti
 
 ## Retrospective & Lessons Learned
 
-### Team Organization J. R
+### Team Organization [J.R.]
 
 The team was taken on by **Jan Schröter** but work was distributed informally. This resulted in some organizational chaos, particularly when tasks had dependencies on each other.
 
@@ -100,33 +100,33 @@ One exception: **Jan Röhrle** took on the role of documentation reviewer, ensur
 
 **Roles / responsibilities** were not formally assigned. But came to use naturally.
 
-### Biggest Challenges J. R
+### Biggest Challenges [J.R.]
 
 The most significant challenge was **implementation uncertainty due to late clarification of requirements via exercises**. The team would form an understanding of how a feature should work, begin implementing it, and then — weeks later — receive an exercise that revealed the intended approach was fundamentally different. This led to **complete rewrites** of components, which was both time-consuming and demoralizing.
 
 > *"Having an idea how to implement something, then 2 weeks later getting an exercise which revealed it was meant in a different way — leading to a complete redo."*
 
-### What Worked Well J. R
+### What Worked Well [J.R.]
 
 - **Task distribution** for independent tasks was efficient.
 - The **CI pipeline** proved to be a broadly useful skill — applicable beyond this course to future projects.
 
-### What Didn't Work Well Benni
+### What Didn't Work Well [Benni]
 
 - **Work distribution broke down** when tasks were dependent on each other, creating blockers.
 - Frequent **refactoring due to new implementation tasks** was tedious and often fell to a single person. After each refactor, the rest of the team had to re-learn the updated system architecture.
 - The last Task 11 was very intensive as a complete ui needed to be made.
 
-### Most Valuable Exercise Benni
+### Most Valuable Exercise [Benni]
 
 The **CI/CD integration exercise** was rated most valuable by the team, as it introduced tooling and practices directly transferable to professional and personal projects outside this course.
 
-### What the Team Would Do Differently Benni
+### What the Team Would Do Differently [Benni]
 
 - In a real project: **communicate more closely with the customer** early on to clarify exact requirements — ideally receiving all exercises in advance to prevent rework.
 - Establish **clearer team structure** — even a lightweight hierarchy helps with small, well-scoped problems.
 
-### Suggestions for the Course Benni
+### Suggestions for the Course [Benni]
 
 1. **Reduce iterative refactoring overhead.** The current exercise format often forces teams to repeatedly restructure their codebase. A higher-level architectural direction given early would reduce wasted effort.
 
