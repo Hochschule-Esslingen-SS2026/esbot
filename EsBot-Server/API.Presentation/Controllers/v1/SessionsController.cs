@@ -117,6 +117,9 @@ public class SessionsController : ControllerBase
     {
         if (!ModelState.IsValid)
             return UnprocessableEntity(ModelState);
+
+        if (createQuizRequest.Topic.Equals("NSFW", StringComparison.OrdinalIgnoreCase))
+            return StatusCode(402, "This Topic is NSFW");
         try
         {
             var quizResponse = await _chatService.RequestQuiz(createQuizRequest);
